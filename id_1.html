@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>3 Network Analysis in R | 中文书模板</title>
+  <meta name="description" content="这是用R的bookdown功能制作中文图书的模板，输出格式为bookdown::gitbook和bookdown::pdf_book." />
+  <meta name="generator" content="bookdown 0.30 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="3 Network Analysis in R | 中文书模板" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="这是用R的bookdown功能制作中文图书的模板，输出格式为bookdown::gitbook和bookdown::pdf_book." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="3 Network Analysis in R | 中文书模板" />
+  
+  <meta name="twitter:description" content="这是用R的bookdown功能制作中文图书的模板，输出格式为bookdown::gitbook和bookdown::pdf_book." />
+  
+
+<meta name="author" content="zzw" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="causal.html"/>
+<link rel="next" href="references.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<script src="libs/threejs-111/three.min.js"></script>
+<script src="libs/threejs-111/Detector.js"></script>
+<script src="libs/threejs-111/Projector.js"></script>
+<script src="libs/threejs-111/CanvasRenderer.js"></script>
+<script src="libs/threejs-111/TrackballControls.js"></script>
+<script src="libs/threejs-111/StateOrbitControls.js"></script>
+<script src="libs/scatterplotThree-binding-0.3.3/scatterplotThree.js"></script>
+<link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  jax: ["input/TeX","output/SVG"],
+  extensions: ["tex2jax.js","MathMenu.js","MathZoom.js"],
+  TeX: {
+    extensions: ["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+   src="../../../MathJax/MathJax.js">
+</script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> 简介</a></li>
+<li class="chapter" data-level="2" data-path="causal.html"><a href="causal.html"><i class="fa fa-check"></i><b>2</b> 格兰格因果性</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="causal.html"><a href="causal.html#causal-intro"><i class="fa fa-check"></i><b>2.1</b> 介绍</a></li>
+<li class="chapter" data-level="2.2" data-path="causal.html"><a href="causal.html#causal-def"><i class="fa fa-check"></i><b>2.2</b> 格兰格因果性的定义</a></li>
+</ul></li>
+<li class="part"><span><b>I 网络分析</b></span></li>
+<li class="chapter" data-level="3" data-path="id_1.html"><a href="id_1.html"><i class="fa fa-check"></i><b>3</b> Network Analysis in R</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="id_1.html"><a href="id_1.html#id_1a"><i class="fa fa-check"></i><b>3.1</b> Basic Concepts and Applications</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="id_1.html"><a href="id_1.html#id_1a1"><i class="fa fa-check"></i><b>3.1.1</b> Basic Concepts about Graph</a></li>
+<li class="chapter" data-level="3.1.2" data-path="id_1.html"><a href="id_1.html#id_1a2"><i class="fa fa-check"></i><b>3.1.2</b> Add and Visualizing attributes</a></li>
+<li class="chapter" data-level="3.1.3" data-path="id_1.html"><a href="id_1.html#id_1a3"><i class="fa fa-check"></i><b>3.1.3</b> Network Visualization</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="id_1.html"><a href="id_1.html#id_1b"><i class="fa fa-check"></i><b>3.2</b> Directed networks</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="id_1.html"><a href="id_1.html#id_1b1"><i class="fa fa-check"></i><b>3.2.1</b> Basic Concepts</a></li>
+<li class="chapter" data-level="3.2.2" data-path="id_1.html"><a href="id_1.html#id_1b2"><i class="fa fa-check"></i><b>3.2.2</b> Relationships between edges</a></li>
+<li class="chapter" data-level="3.2.3" data-path="id_1.html"><a href="id_1.html#id_1b3"><i class="fa fa-check"></i><b>3.2.3</b> Relationships between vertices</a></li>
+<li class="chapter" data-level="3.2.4" data-path="id_1.html"><a href="id_1.html#id_1b4"><i class="fa fa-check"></i><b>3.2.4</b> Identifying key vertices</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="id_1.html"><a href="id_1.html#id_1c"><i class="fa fa-check"></i><b>3.3</b> Network Structure</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="id_1.html"><a href="id_1.html#id_1c1"><i class="fa fa-check"></i><b>3.3.1</b> Basic Structure metrics</a></li>
+<li class="chapter" data-level="3.3.2" data-path="id_1.html"><a href="id_1.html#id_1c2"><i class="fa fa-check"></i><b>3.3.2</b> Random graphs</a></li>
+<li class="chapter" data-level="3.3.3" data-path="id_1.html"><a href="id_1.html#id_1c3"><i class="fa fa-check"></i><b>3.3.3</b> Randomization test</a></li>
+<li class="chapter" data-level="3.3.4" data-path="id_1.html"><a href="id_1.html#id_1c4"><i class="fa fa-check"></i><b>3.3.4</b> Network substructures’ metrics</a></li>
+<li class="chapter" data-level="3.3.5" data-path="id_1.html"><a href="id_1.html#id_1c5"><i class="fa fa-check"></i><b>3.3.5</b> Visualize largest cliques</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="id_1.html"><a href="id_1.html#id_1d"><i class="fa fa-check"></i><b>3.4</b> Do birds of a feather flock together?</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="id_1.html"><a href="id_1.html#id_1d1"><i class="fa fa-check"></i><b>3.4.1</b> Community detection</a></li>
+<li class="chapter" data-level="3.4.2" data-path="id_1.html"><a href="id_1.html#id_1d2"><i class="fa fa-check"></i><b>3.4.2</b> Interactive network visualizations</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">中文书模板</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="id_1" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">3</span> Network Analysis in R<a href="id_1.html#id_1" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="id_1a" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> Basic Concepts and Applications<a href="id_1.html#id_1a" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="id_1a1" class="section level3 hasAnchor" number="3.1.1">
+<h3><span class="header-section-number">3.1.1</span> Basic Concepts about Graph<a href="id_1.html#id_1a1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>vertex(or node)</li>
+<li>edge</li>
+<li>direct or undirect graph
+This course is using <strong>igraph</strong> for working with network data and network visualizing.</li>
+</ul>
+<p><strong>For creating an igraph object</strong> , you can use <code>graph.edgelist()</code> ,but remember convert data to matrix form. The position of the nodes and edges of the graph <strong>is not important</strong> (for now), what is important is the relationship between each node.</p>
+<p>Another function to create an igraph object is <code>graph_from_data_frame()</code>. Two data frames need to be provided - one contains all edges in the network with attributes and one all vertices in the network.</p>
+<ul>
+<li><code>V()</code>: returns all vertices in a network.</li>
+<li><code>E()</code>: returns all edges.</li>
+<li><code>gorder()</code> : returns number of vertices.</li>
+<li><code>gsize()</code> : returns number of edges.</li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="id_1.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create an igraph object, first you need to convert data to matrix form</span></span>
+<span id="cb1-2"><a href="id_1.html#cb1-2" aria-hidden="true" tabindex="-1"></a>friends.mat <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(friends)</span>
+<span id="cb1-3"><a href="id_1.html#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="id_1.html#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert friends matrix to an igraph object</span></span>
+<span id="cb1-5"><a href="id_1.html#cb1-5" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="fu">graph.edgelist</span>(friends.mat, <span class="at">directed =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb1-6"><a href="id_1.html#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="id_1.html#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Another way to create igraph object</span></span>
+<span id="cb1-8"><a href="id_1.html#cb1-8" aria-hidden="true" tabindex="-1"></a>g1 <span class="ot">&lt;-</span> <span class="fu">graph_from_data_frame</span>(<span class="at">d =</span> friends.edges, <span class="at">vertices =</span> friends.nodes, <span class="at">directed =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb1-9"><a href="id_1.html#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="id_1.html#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Subset vertices and edges</span></span>
+<span id="cb1-11"><a href="id_1.html#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">V</span>(g)</span>
+<span id="cb1-12"><a href="id_1.html#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="do">## + 16/16 vertices, named, from f064c29:</span></span>
+<span id="cb1-13"><a href="id_1.html#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="do">##  [1] Jessie  Sidney  Britt   Donnie  Karl    Berry   Rene    Shayne  Elisha </span></span>
+<span id="cb1-14"><a href="id_1.html#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="do">## [10] Whitney Odell   Lacy    Eugene  Jude    Rickie  Tommy</span></span>
+<span id="cb1-15"><a href="id_1.html#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="fu">E</span>(g)</span>
+<span id="cb1-16"><a href="id_1.html#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="do">## + 27/27 edges from f064c29 (vertex names):</span></span>
+<span id="cb1-17"><a href="id_1.html#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="do">##  [1] Jessie --Sidney  Jessie --Britt   Sidney --Britt   Sidney --Donnie </span></span>
+<span id="cb1-18"><a href="id_1.html#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="do">##  [5] Karl   --Berry   Sidney --Rene    Britt  --Rene    Sidney --Shayne </span></span>
+<span id="cb1-19"><a href="id_1.html#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="do">##  [9] Sidney --Elisha  Sidney --Whitney Jessie --Whitney Donnie --Odell  </span></span>
+<span id="cb1-20"><a href="id_1.html#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="do">## [13] Sidney --Odell   Rene   --Whitney Donnie --Shayne  Jessie --Lacy   </span></span>
+<span id="cb1-21"><a href="id_1.html#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="do">## [17] Rene   --Lacy    Elisha --Eugene  Eugene --Jude    Berry  --Odell  </span></span>
+<span id="cb1-22"><a href="id_1.html#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="do">## [21] Odell  --Rickie  Karl   --Odell   Britt  --Lacy    Elisha --Jude   </span></span>
+<span id="cb1-23"><a href="id_1.html#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="do">## [25] Whitney--Lacy    Britt  --Whitney Karl   --Tommy</span></span>
+<span id="cb1-24"><a href="id_1.html#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-25"><a href="id_1.html#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="fu">gorder</span>(g) <span class="co"># as as vcount(g)</span></span>
+<span id="cb1-26"><a href="id_1.html#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 16</span></span>
+<span id="cb1-27"><a href="id_1.html#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="fu">gsize</span>(g)</span>
+<span id="cb1-28"><a href="id_1.html#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 27</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="id_1.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make a very basic plot of the network</span></span>
+<span id="cb2-2"><a href="id_1.html#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(g)</span></code></pre></div>
+<p><img src="2001-chapter02_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+</div>
+<div id="id_1a2" class="section level3 hasAnchor" number="3.1.2">
+<h3><span class="header-section-number">3.1.2</span> Add and Visualizing attributes<a href="id_1.html#id_1a2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Vertices and edges could have attributes.
+- <code>set_vertex_attr()</code> : add attributes to vertices.
+- <code>set_edge_attr()</code> : add attributes to edges.</p>
+<p>You can use <code>V()</code> to view attributes of vertices in a dataframe.</p>
+<p>When attributes are added, something interesting is about to begin . You can subset vertices and edges by specific conditions or delete them.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="id_1.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># suppose you have three attributes</span></span>
+<span id="cb3-2"><a href="id_1.html#cb3-2" aria-hidden="true" tabindex="-1"></a>genders <span class="ot">&lt;-</span> friends.nodes<span class="sc">$</span>gender</span>
+<span id="cb3-3"><a href="id_1.html#cb3-3" aria-hidden="true" tabindex="-1"></a>ages <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">18</span><span class="sc">:</span><span class="dv">23</span>, <span class="at">size =</span> <span class="dv">16</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb3-4"><a href="id_1.html#cb3-4" aria-hidden="true" tabindex="-1"></a>hours <span class="ot">&lt;-</span> friends.edges<span class="sc">$</span>hours</span>
+<span id="cb3-5"><a href="id_1.html#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="id_1.html#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="id_1.html#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Create new vertex attributes called &#39;gender&#39; and &#39;age&#39;</span></span>
+<span id="cb3-8"><a href="id_1.html#cb3-8" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="fu">set_vertex_attr</span>(g, <span class="st">&quot;gender&quot;</span>, <span class="at">value =</span> genders)</span>
+<span id="cb3-9"><a href="id_1.html#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="do">## Warning in vattrs[[name]][index] &lt;- value: number of items to replace is not a</span></span>
+<span id="cb3-10"><a href="id_1.html#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="do">## multiple of replacement length</span></span>
+<span id="cb3-11"><a href="id_1.html#cb3-11" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="fu">set_vertex_attr</span>(g, <span class="st">&quot;age&quot;</span>, <span class="at">value =</span> ages)</span>
+<span id="cb3-12"><a href="id_1.html#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="id_1.html#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Create new edge attribute called &#39;hours&#39;</span></span>
+<span id="cb3-14"><a href="id_1.html#cb3-14" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="fu">set_edge_attr</span>(g, <span class="st">&#39;hours&#39;</span>, <span class="at">value =</span> hours)</span>
+<span id="cb3-15"><a href="id_1.html#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="do">## Warning in eattrs[[name]][index] &lt;- value: number of items to replace is not a</span></span>
+<span id="cb3-16"><a href="id_1.html#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="do">## multiple of replacement length</span></span>
+<span id="cb3-17"><a href="id_1.html#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-18"><a href="id_1.html#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="co"># View all vertex and edge attributes  in a list</span></span>
+<span id="cb3-19"><a href="id_1.html#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="fu">vertex_attr</span>(g)</span>
+<span id="cb3-20"><a href="id_1.html#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="do">## $name</span></span>
+<span id="cb3-21"><a href="id_1.html#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="do">##  [1] &quot;Jessie&quot;  &quot;Sidney&quot;  &quot;Britt&quot;   &quot;Donnie&quot;  &quot;Karl&quot;    &quot;Berry&quot;   &quot;Rene&quot;   </span></span>
+<span id="cb3-22"><a href="id_1.html#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="do">##  [8] &quot;Shayne&quot;  &quot;Elisha&quot;  &quot;Whitney&quot; &quot;Odell&quot;   &quot;Lacy&quot;    &quot;Eugene&quot;  &quot;Jude&quot;   </span></span>
+<span id="cb3-23"><a href="id_1.html#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="do">## [15] &quot;Rickie&quot;  &quot;Tommy&quot;  </span></span>
+<span id="cb3-24"><a href="id_1.html#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb3-25"><a href="id_1.html#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="do">## $gender</span></span>
+<span id="cb3-26"><a href="id_1.html#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="do">##  [1] &quot;M&quot; &quot;F&quot; &quot;F&quot; &quot;M&quot; &quot;M&quot; &quot;F&quot; &quot;M&quot; &quot;F&quot; &quot;M&quot; &quot;F&quot; &quot;F&quot; &quot;M&quot; &quot;M&quot; &quot;M&quot; &quot;M&quot; &quot;M&quot;</span></span>
+<span id="cb3-27"><a href="id_1.html#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb3-28"><a href="id_1.html#cb3-28" aria-hidden="true" tabindex="-1"></a><span class="do">## $age</span></span>
+<span id="cb3-29"><a href="id_1.html#cb3-29" aria-hidden="true" tabindex="-1"></a><span class="do">##  [1] 21 21 19 21 20 19 21 23 20 22 21 20 21 23 20 18</span></span>
+<span id="cb3-30"><a href="id_1.html#cb3-30" aria-hidden="true" tabindex="-1"></a><span class="fu">edge_attr</span>(g)</span>
+<span id="cb3-31"><a href="id_1.html#cb3-31" aria-hidden="true" tabindex="-1"></a><span class="do">## $hours</span></span>
+<span id="cb3-32"><a href="id_1.html#cb3-32" aria-hidden="true" tabindex="-1"></a><span class="do">##  [1] 1 3 2 3 5 1 3 5 2 1 3 5 3 2 6 1 2 2 1 1 2 1 1 3 2 1 3</span></span>
+<span id="cb3-33"><a href="id_1.html#cb3-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-34"><a href="id_1.html#cb3-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Find edges with conditions, this grammar is like the way Python takes a subset</span></span>
+<span id="cb3-35"><a href="id_1.html#cb3-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-36"><a href="id_1.html#cb3-36" aria-hidden="true" tabindex="-1"></a><span class="co"># V(g)[[age == 22]] </span></span>
+<span id="cb3-37"><a href="id_1.html#cb3-37" aria-hidden="true" tabindex="-1"></a><span class="co"># E(g)[[inc(&#39;Lacy&#39;)]]  </span></span>
+<span id="cb3-38"><a href="id_1.html#cb3-38" aria-hidden="true" tabindex="-1"></a><span class="co"># E(g)[[hours&gt;=3]]  </span></span>
+<span id="cb3-39"><a href="id_1.html#cb3-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-40"><a href="id_1.html#cb3-40" aria-hidden="true" tabindex="-1"></a><span class="co"># Delete edges and vertices</span></span>
+<span id="cb3-41"><a href="id_1.html#cb3-41" aria-hidden="true" tabindex="-1"></a>g1_1 <span class="ot">&lt;-</span> <span class="fu">delete_edges</span>(g1, <span class="fu">E</span>(g1)[hours <span class="sc">&lt;</span> <span class="dv">2</span>])</span>
+<span id="cb3-42"><a href="id_1.html#cb3-42" aria-hidden="true" tabindex="-1"></a>g1_2 <span class="ot">&lt;-</span> <span class="fu">delete_vertices</span>(g, <span class="fu">V</span>(g)[[age <span class="sc">&lt;</span><span class="dv">20</span>]])</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="id_1.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualizing attributes</span></span>
+<span id="cb4-2"><a href="id_1.html#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span>(<span class="st">&quot;This graph tells me that boys prefer to make friends and their relationship graph is more aggregated&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;This graph tells me that boys prefer to make friends and their relationship graph is more aggregated&quot;</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="id_1.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set vertex color by gender</span></span>
+<span id="cb6-2"><a href="id_1.html#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">V</span>(g1)<span class="sc">$</span>color <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">V</span>(g1)<span class="sc">$</span>gender <span class="sc">==</span> <span class="st">&quot;F&quot;</span>, <span class="st">&quot;orange&quot;</span>, <span class="st">&quot;#24addb&quot;</span>)</span>
+<span id="cb6-3"><a href="id_1.html#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="id_1.html#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the graph</span></span>
+<span id="cb6-5"><a href="id_1.html#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(g1, <span class="at">vertex.label.color =</span> <span class="st">&quot;black&quot;</span>)</span></code></pre></div>
+<p><img src="2001-chapter02_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+</div>
+<div id="id_1a3" class="section level3 hasAnchor" number="3.1.3">
+<h3><span class="header-section-number">3.1.3</span> Network Visualization<a href="id_1.html#id_1a3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The most effective network visualizations should <strong>immediately provide insight and understanding</strong> to the viewer. These styles below can be done separately or in conjunction with each other.</p>
+<p>Vertices Style
+- size
+- labels
+- color
+- shape</p>
+<p>Edges Style
+- color
+- line type</p>
+<hr />
+<p>Appropriate Layout
+- Minimize edge crossing
+- Do not allow vertices to overlap
+- Make edge lengths as uniform as possible
+- Increase symmetry of the network as much as possible
+- <strong>Position more influential nodes towards the center</strong></p>
+<p>In the <code>plot()</code> function, change the layout argument to produce different graph layout. Choosing a correct layout can be bewildering. Fortunately igraph has a function <code>layout_nicely()</code> that tries to choose the most appropriate layout function for a given graph object.</p>
+<ul>
+<li>circle
+<ul>
+<li><code>layout_in_circle()</code></li>
+</ul></li>
+<li>fruchterman-reingold:
+<ul>
+<li><code>layout_with_fr()</code>, <a href="https://en.wikipedia.org/wiki/Force-directed_graph_drawing">details on Wiki</a></li>
+</ul></li>
+<li>kamada-kawai:
+<ul>
+<li><code>layout_with_fr()</code></li>
+</ul></li>
+<li>grid:
+<ul>
+<li><code>layout_on_grid()</code></li>
+</ul></li>
+<li>lgl:
+<ul>
+<li><code>layout_with_lgl()</code></li>
+</ul></li>
+<li>tree:
+<ul>
+<li><code>layout_as_tree()</code>
+(For more layouts see the manual on <a href="https://igraph.org/r/doc/layout_.html">igraph website</a>)</li>
+</ul></li>
+</ul>
+<p>You can also stipulate the layout <strong>by providing a matrix of (x, y) coordinates for each vertex</strong>.
+Here you use the <code>layout_as_tree()</code> function to generate the matrix m of coordinates. Then pass m to the layout function in plot() to plot.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="id_1.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualization in layout</span></span>
+<span id="cb7-2"><a href="id_1.html#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(g1, <span class="at">vertex.label.color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">layout =</span> <span class="fu">layout_in_circle</span>(g1))</span></code></pre></div>
+<p><img src="2001-chapter02_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="id_1.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(g1, <span class="at">vertex.label.color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">layout =</span> <span class="fu">layout_with_fr</span>(g1))</span></code></pre></div>
+<p><img src="2001-chapter02_files/figure-html/unnamed-chunk-6-2.png" width="672" /></p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="id_1.html#cb9-1" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">layout_as_tree</span>(g1)</span>
+<span id="cb9-2"><a href="id_1.html#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(g1, <span class="at">vertex.label.color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">layout =</span>  m)</span></code></pre></div>
+<p><img src="2001-chapter02_files/figure-html/unnamed-chunk-6-3.png" width="672" /></p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="id_1.html#cb10-1" aria-hidden="true" tabindex="-1"></a>m1 <span class="ot">&lt;-</span> <span class="fu">layout_nicely</span>(g1)</span>
+<span id="cb10-2"><a href="id_1.html#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(g1, <span class="at">vertex.label.color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">layout =</span> m1)</span></code></pre></div>
+<p><img src="2001-chapter02_files/figure-html/unnamed-chunk-6-4.png" width="672" /></p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="id_1.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualiztion in edges</span></span>
+<span id="cb11-2"><a href="id_1.html#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="id_1.html#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a vector of weights based on the number of hours each pair spend together</span></span>
+<span id="cb11-4"><a href="id_1.html#cb11-4" aria-hidden="true" tabindex="-1"></a>w1 <span class="ot">&lt;-</span> <span class="fu">E</span>(g1)<span class="sc">$</span>hours</span>
+<span id="cb11-5"><a href="id_1.html#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="id_1.html#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the network varying edges by weights</span></span>
+<span id="cb11-7"><a href="id_1.html#cb11-7" aria-hidden="true" tabindex="-1"></a>m1 <span class="ot">&lt;-</span> <span class="fu">layout_nicely</span>(g1)</span>
+<span id="cb11-8"><a href="id_1.html#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(g1, </span>
+<span id="cb11-9"><a href="id_1.html#cb11-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">vertex.label.color =</span> <span class="st">&quot;black&quot;</span>, </span>
+<span id="cb11-10"><a href="id_1.html#cb11-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">edge.color =</span> <span class="st">&#39;black&#39;</span>,</span>
+<span id="cb11-11"><a href="id_1.html#cb11-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">edge.width =</span> w1,</span>
+<span id="cb11-12"><a href="id_1.html#cb11-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">layout =</span> m1)</span></code></pre></div>
+<p><img src="2001-chapter02_files/figure-html/unnamed-chunk-6-5.png" width="672" /></p>
+</div>
+</div>
+<div id="id_1b" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> Directed networks<a href="id_1.html#id_1b" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="id_1b1" class="section level3 hasAnchor" number="3.2.1">
+<h3><span class="header-section-number">3.2.1</span> Basic Concepts<a href="id_1.html#id_1b1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>head -&gt; tail</li>
+</ul>
+<p>The edges in undirected networks simply indicate that a relationship of some kind exists between two vertices. However, in many networks edges do have directionality. In such directed networks, an arrow represent an edge going from one vertex to another vertex.</p>
+<p>Subset each vertex from which each edge originates by using <code>head_of()</code>. This function takes two arguments, the first being the graph object and the second the edges to examine. For all edges you can use E(g)</p>
+<p><strong>The example network</strong> you will use is of a severe measles outbreak that spread through the town of Hagelloch, Germany, in 1861, affecting 188 children. Each edge represents the transmission of measles from one individual to the next.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="id_1.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the graph object</span></span>
+<span id="cb12-2"><a href="id_1.html#cb12-2" aria-hidden="true" tabindex="-1"></a>g2 <span class="ot">&lt;-</span> <span class="fu">graph_from_data_frame</span>(measles, <span class="at">directed =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb12-3"><a href="id_1.html#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="id_1.html#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># is the graph directed?</span></span>
+<span id="cb12-5"><a href="id_1.html#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="fu">is.directed</span>(g2)</span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="id_1.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Where does each edge originate from? But I don&#39;t understand the result ...</span></span>
+<span id="cb14-2"><a href="id_1.html#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co"># table(head_of(g2, E(g2)))</span></span>
+<span id="cb14-3"><a href="id_1.html#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="id_1.html#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(g2, </span>
+<span id="cb14-5"><a href="id_1.html#cb14-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label.color =</span> <span class="st">&quot;black&quot;</span>, </span>
+<span id="cb14-6"><a href="id_1.html#cb14-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">edge.color =</span> <span class="st">&#39;gray77&#39;</span>,</span>
+<span id="cb14-7"><a href="id_1.html#cb14-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.size =</span> <span class="dv">0</span>,</span>
+<span id="cb14-8"><a href="id_1.html#cb14-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">edge.arrow.size =</span> <span class="fl">0.1</span>,</span>
+<span id="cb14-9"><a href="id_1.html#cb14-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">layout =</span> <span class="fu">layout_nicely</span>(g2))</span></code></pre></div>
+<p><img src="2001-chapter02_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+</div>
+<div id="id_1b2" class="section level3 hasAnchor" number="3.2.2">
+<h3><span class="header-section-number">3.2.2</span> Relationships between edges<a href="id_1.html#id_1b2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Check if there is an edge going in each direction between vertex 184 to vertex 178 using single brackets subsetting of the graph object.</p>
+<p>Using the function <code>incident()</code> identify those edges that go in either direction from vertex 184 or only those going out from vertex 184. Choose <code>mode</code> from all, in and out.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="id_1.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Is there an edge going from vertex 184 to vertex 178?</span></span>
+<span id="cb15-2"><a href="id_1.html#cb15-2" aria-hidden="true" tabindex="-1"></a>g2[<span class="st">&#39;184&#39;</span>, <span class="st">&#39;178&#39;</span>]</span>
+<span id="cb15-3"><a href="id_1.html#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 1</span></span>
+<span id="cb15-4"><a href="id_1.html#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="id_1.html#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Is there an edge going from vertex 178 to vertex 184?</span></span>
+<span id="cb15-6"><a href="id_1.html#cb15-6" aria-hidden="true" tabindex="-1"></a>g2[<span class="st">&#39;178&#39;</span>, <span class="st">&#39;184&#39;</span>]</span>
+<span id="cb15-7"><a href="id_1.html#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0</span></span>
+<span id="cb15-8"><a href="id_1.html#cb15-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-9"><a href="id_1.html#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Show all edges going to or from vertex 184</span></span>
+<span id="cb15-10"><a href="id_1.html#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="fu">incident</span>(g2, <span class="st">&#39;184&#39;</span>, <span class="at">mode =</span> <span class="fu">c</span>(<span class="st">&quot;all&quot;</span>))</span>
+<span id="cb15-11"><a href="id_1.html#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="do">## + 6/184 edges from f0df7cd (vertex names):</span></span>
+<span id="cb15-12"><a href="id_1.html#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 184-&gt;45  184-&gt;182 184-&gt;181 184-&gt;178 184-&gt;183 184-&gt;177</span></span>
+<span id="cb15-13"><a href="id_1.html#cb15-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-14"><a href="id_1.html#cb15-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Show all edges going out from vertex 184</span></span>
+<span id="cb15-15"><a href="id_1.html#cb15-15" aria-hidden="true" tabindex="-1"></a><span class="fu">incident</span>(g2, <span class="st">&#39;184&#39;</span>, <span class="at">mode =</span> <span class="fu">c</span>(<span class="st">&quot;out&quot;</span>))</span>
+<span id="cb15-16"><a href="id_1.html#cb15-16" aria-hidden="true" tabindex="-1"></a><span class="do">## + 6/184 edges from f0df7cd (vertex names):</span></span>
+<span id="cb15-17"><a href="id_1.html#cb15-17" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 184-&gt;45  184-&gt;182 184-&gt;181 184-&gt;178 184-&gt;183 184-&gt;177</span></span></code></pre></div>
+</div>
+<div id="id_1b3" class="section level3 hasAnchor" number="3.2.3">
+<h3><span class="header-section-number">3.2.3</span> Relationships between vertices<a href="id_1.html#id_1b3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><code>neighbors()</code>: A vertex is a neighbor of another one (in other words, the two vertices are adjacent), if they are incident to the same edge.
+<ul>
+<li><code>intersection()</code>: to identify if there are any vertices that exist in both neighbors1 and neighbors1.</li>
+</ul></li>
+</ul>
+<p>A path is simply the chain of connections between vertices. The number of intervening edges between two vertices represents the <a href="https://en.wikipedia.org/wiki/Distance_(graph_theory)">geodesic distance</a> between vertices.</p>
+<ul>
+<li><code>farthest_vertices()</code>: Find the length of the longest path in the network(Sometimes it can be more than one).</li>
+<li><code>get_diameter()</code> : Identify the sequence of the path.</li>
+<li><code>ego()</code>: Find the vertices not farther than a given limit from another fixed vertex, these are called the neighborhood of the vertex.</li>
+</ul>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="id_1.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Identify neighbors of vertex 10 in specific mode</span></span>
+<span id="cb16-2"><a href="id_1.html#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">neighbors</span>(g2, <span class="st">&#39;10&#39;</span>, <span class="at">mode =</span> <span class="fu">c</span>(<span class="st">&#39;all&#39;</span>))</span>
+<span id="cb16-3"><a href="id_1.html#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="do">## + 5/187 vertices, named, from f0df7cd:</span></span>
+<span id="cb16-4"><a href="id_1.html#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 45 27 48 71 95</span></span>
+<span id="cb16-5"><a href="id_1.html#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-6"><a href="id_1.html#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="fu">neighbors</span>(g2, <span class="st">&#39;10&#39;</span>, <span class="at">mode =</span> <span class="fu">c</span>(<span class="st">&#39;in&#39;</span>))</span>
+<span id="cb16-7"><a href="id_1.html#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="do">## + 1/187 vertex, named, from f0df7cd:</span></span>
+<span id="cb16-8"><a href="id_1.html#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 45</span></span>
+<span id="cb16-9"><a href="id_1.html#cb16-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-10"><a href="id_1.html#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Identify any vertices that receive an edge from vertex 42 and direct an edge to vertex 124</span></span>
+<span id="cb16-11"><a href="id_1.html#cb16-11" aria-hidden="true" tabindex="-1"></a>n1 <span class="ot">&lt;-</span> <span class="fu">neighbors</span>(g2, <span class="st">&#39;42&#39;</span>, <span class="at">mode =</span> <span class="fu">c</span>(<span class="st">&#39;out&#39;</span>))</span>
+<span id="cb16-12"><a href="id_1.html#cb16-12" aria-hidden="true" tabindex="-1"></a>n2 <span class="ot">&lt;-</span> <span class="fu">neighbors</span>(g2, <span class="st">&#39;124&#39;</span>, <span class="at">mode =</span> <span class="fu">c</span>(<span class="st">&#39;in&#39;</span>))</span>
+<span id="cb16-13"><a href="id_1.html#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="fu">intersection</span>(n1, n2)</span>
+<span id="cb16-14"><a href="id_1.html#cb16-14" aria-hidden="true" tabindex="-1"></a><span class="do">## + 1/187 vertex, named, from f0df7cd:</span></span>
+<span id="cb16-15"><a href="id_1.html#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 7</span></span>
+<span id="cb16-16"><a href="id_1.html#cb16-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-17"><a href="id_1.html#cb16-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-18"><a href="id_1.html#cb16-18" aria-hidden="true" tabindex="-1"></a><span class="co"># distance between two vertices</span></span>
+<span id="cb16-19"><a href="id_1.html#cb16-19" aria-hidden="true" tabindex="-1"></a><span class="fu">farthest_vertices</span>(g2)</span>
+<span id="cb16-20"><a href="id_1.html#cb16-20" aria-hidden="true" tabindex="-1"></a><span class="do">## $vertices</span></span>
+<span id="cb16-21"><a href="id_1.html#cb16-21" aria-hidden="true" tabindex="-1"></a><span class="do">## + 2/187 vertices, named, from f0df7cd:</span></span>
+<span id="cb16-22"><a href="id_1.html#cb16-22" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 184 162</span></span>
+<span id="cb16-23"><a href="id_1.html#cb16-23" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb16-24"><a href="id_1.html#cb16-24" aria-hidden="true" tabindex="-1"></a><span class="do">## $distance</span></span>
+<span id="cb16-25"><a href="id_1.html#cb16-25" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 5</span></span>
+<span id="cb16-26"><a href="id_1.html#cb16-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-27"><a href="id_1.html#cb16-27" aria-hidden="true" tabindex="-1"></a><span class="fu">get_diameter</span>(g2)</span>
+<span id="cb16-28"><a href="id_1.html#cb16-28" aria-hidden="true" tabindex="-1"></a><span class="do">## + 6/187 vertices, named, from f0df7cd:</span></span>
+<span id="cb16-29"><a href="id_1.html#cb16-29" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 184 178 42  7   123 162</span></span>
+<span id="cb16-30"><a href="id_1.html#cb16-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-31"><a href="id_1.html#cb16-31" aria-hidden="true" tabindex="-1"></a><span class="fu">ego</span>(g2, <span class="dv">2</span>, <span class="st">&#39;10&#39;</span>, <span class="at">mode =</span> <span class="fu">c</span>(<span class="st">&#39;out&#39;</span>))</span>
+<span id="cb16-32"><a href="id_1.html#cb16-32" aria-hidden="true" tabindex="-1"></a><span class="do">## [[1]]</span></span>
+<span id="cb16-33"><a href="id_1.html#cb16-33" aria-hidden="true" tabindex="-1"></a><span class="do">## + 5/187 vertices, named, from f0df7cd:</span></span>
+<span id="cb16-34"><a href="id_1.html#cb16-34" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 10 27 48 71 95</span></span></code></pre></div>
+</div>
+<div id="id_1b4" class="section level3 hasAnchor" number="3.2.4">
+<h3><span class="header-section-number">3.2.4</span> Identifying key vertices<a href="id_1.html#id_1b4" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Measurement metrics:
+- in degree
+- out degree
+- Betweenness</p>
+<p>Betweenness is an index of how frequently the vertex lies on shortest paths between any two vertices in the network. It can be thought of as how critical the vertex is to the flow of information through a network.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="id_1.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the out-degree of each vertex</span></span>
+<span id="cb17-2"><a href="id_1.html#cb17-2" aria-hidden="true" tabindex="-1"></a>g.outd <span class="ot">&lt;-</span> <span class="fu">degree</span>(g2, <span class="at">mode =</span> <span class="fu">c</span>(<span class="st">&quot;out&quot;</span>))</span>
+<span id="cb17-3"><a href="id_1.html#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="id_1.html#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-5"><a href="id_1.html#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(g.outd)</span>
+<span id="cb17-6"><a href="id_1.html#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="do">## g.outd</span></span>
+<span id="cb17-7"><a href="id_1.html#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="do">##   0   1   2   3   4   6   7   8  30 </span></span>
+<span id="cb17-8"><a href="id_1.html#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="do">## 125  21  16  12   6   2   3   1   1</span></span>
+<span id="cb17-9"><a href="id_1.html#cb17-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-10"><a href="id_1.html#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Make a histogram of out-degrees</span></span>
+<span id="cb17-11"><a href="id_1.html#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(g.outd, <span class="at">breaks =</span> <span class="dv">30</span>)</span></code></pre></div>
+<p><img src="2001-chapter02_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="id_1.html#cb18-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-2"><a href="id_1.html#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Find the vertex that has the maximum out-degree</span></span>
+<span id="cb18-3"><a href="id_1.html#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">which.max</span>(g.outd)</span>
+<span id="cb18-4"><a href="id_1.html#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="do">## 45 </span></span>
+<span id="cb18-5"><a href="id_1.html#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="do">##  1</span></span>
+<span id="cb18-6"><a href="id_1.html#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-7"><a href="id_1.html#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(g2, </span>
+<span id="cb18-8"><a href="id_1.html#cb18-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label =</span> <span class="cn">NA</span>,</span>
+<span id="cb18-9"><a href="id_1.html#cb18-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">edge.color =</span> <span class="st">&#39;black&#39;</span>,</span>
+<span id="cb18-10"><a href="id_1.html#cb18-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.size =</span> <span class="fu">sqrt</span>(g.outd)<span class="sc">+</span><span class="dv">1</span>,</span>
+<span id="cb18-11"><a href="id_1.html#cb18-11" aria-hidden="true" tabindex="-1"></a>     <span class="at">edge.arrow.size =</span> <span class="fl">0.05</span>,</span>
+<span id="cb18-12"><a href="id_1.html#cb18-12" aria-hidden="true" tabindex="-1"></a>     <span class="at">layout =</span> <span class="fu">layout_nicely</span>(g2))</span></code></pre></div>
+<p><img src="2001-chapter02_files/figure-html/unnamed-chunk-10-2.png" width="672" /></p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="id_1.html#cb19-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-2"><a href="id_1.html#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate betweenness of each vertex</span></span>
+<span id="cb19-3"><a href="id_1.html#cb19-3" aria-hidden="true" tabindex="-1"></a>g.b <span class="ot">&lt;-</span> <span class="fu">betweenness</span>(g2, <span class="at">directed =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb19-4"><a href="id_1.html#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-5"><a href="id_1.html#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(g.b, <span class="at">breaks =</span> <span class="dv">80</span>)</span></code></pre></div>
+<p><img src="2001-chapter02_files/figure-html/unnamed-chunk-10-3.png" width="672" /></p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="id_1.html#cb20-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-2"><a href="id_1.html#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Create plot with vertex size determined by betweenness score</span></span>
+<span id="cb20-3"><a href="id_1.html#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(g2, </span>
+<span id="cb20-4"><a href="id_1.html#cb20-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label =</span> <span class="cn">NA</span>,</span>
+<span id="cb20-5"><a href="id_1.html#cb20-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">edge.color =</span> <span class="st">&#39;black&#39;</span>,</span>
+<span id="cb20-6"><a href="id_1.html#cb20-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.size =</span> <span class="fu">sqrt</span>(g.b)<span class="sc">+</span><span class="dv">1</span>,</span>
+<span id="cb20-7"><a href="id_1.html#cb20-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">edge.arrow.size =</span> <span class="fl">0.05</span>,</span>
+<span id="cb20-8"><a href="id_1.html#cb20-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">layout =</span> <span class="fu">layout_nicely</span>(g2))</span></code></pre></div>
+<p><img src="2001-chapter02_files/figure-html/unnamed-chunk-10-4.png" width="672" /></p>
+<p><code>make_ego_graph()</code> : Create a subset of our network comprised of vertices that are connected to fixed vertex , the first argument is the original graph g, the second argument is the maximal number of connections that any vertex needs to be connected to our vertex of interest.</p>
+<p>One issue with the measles dataset is that there are three individuals for whom no information is known about who infected them. One of these individuals (vertex 184) appears ultimately responsible for spreading the disease to many other individuals even though they did not directly infect too many individuals. (This entire paragraph is excerpted from the course)</p>
+<p>However, because vertex 184 has no incoming edge in the network they appear to have low betweenness. One way to explore the importance of this vertex is by visualizing the geodesic distances of connections going out from this individual. In this exercise you shall create a plot of these distances from this patient zero. (This entire paragraph is excerpted from the course)</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="id_1.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make an ego graph</span></span>
+<span id="cb21-2"><a href="id_1.html#cb21-2" aria-hidden="true" tabindex="-1"></a>g184 <span class="ot">&lt;-</span> <span class="fu">make_ego_graph</span>(g2, <span class="fu">diameter</span>(g2), <span class="at">nodes =</span> <span class="st">&#39;184&#39;</span>, <span class="at">mode =</span> <span class="fu">c</span>(<span class="st">&quot;all&quot;</span>))[[<span class="dv">1</span>]]</span>
+<span id="cb21-3"><a href="id_1.html#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="id_1.html#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Get a vector of geodesic distances of all vertices from vertex 184 </span></span>
+<span id="cb21-5"><a href="id_1.html#cb21-5" aria-hidden="true" tabindex="-1"></a>dists <span class="ot">&lt;-</span> <span class="fu">distances</span>(g184, <span class="st">&quot;184&quot;</span>)</span>
+<span id="cb21-6"><a href="id_1.html#cb21-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-7"><a href="id_1.html#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a color palette of length equal to the maximal geodesic distance plus one.</span></span>
+<span id="cb21-8"><a href="id_1.html#cb21-8" aria-hidden="true" tabindex="-1"></a>colors <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;orange&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;dodgerblue&quot;</span>, <span class="st">&quot;cyan&quot;</span>)</span>
+<span id="cb21-9"><a href="id_1.html#cb21-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-10"><a href="id_1.html#cb21-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Set color attribute to vertices of network g184.</span></span>
+<span id="cb21-11"><a href="id_1.html#cb21-11" aria-hidden="true" tabindex="-1"></a><span class="fu">V</span>(g184)<span class="sc">$</span>color <span class="ot">&lt;-</span> colors[dists<span class="sc">+</span><span class="dv">1</span>]</span>
+<span id="cb21-12"><a href="id_1.html#cb21-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-13"><a href="id_1.html#cb21-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualize the network based on geodesic distance from vertex 184 (patient zero).</span></span>
+<span id="cb21-14"><a href="id_1.html#cb21-14" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(g184, </span>
+<span id="cb21-15"><a href="id_1.html#cb21-15" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label =</span> dists, </span>
+<span id="cb21-16"><a href="id_1.html#cb21-16" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label.color =</span> <span class="st">&quot;white&quot;</span>,</span>
+<span id="cb21-17"><a href="id_1.html#cb21-17" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label.cex =</span> .<span class="dv">6</span>,</span>
+<span id="cb21-18"><a href="id_1.html#cb21-18" aria-hidden="true" tabindex="-1"></a>     <span class="at">edge.color =</span> <span class="st">&#39;black&#39;</span>,</span>
+<span id="cb21-19"><a href="id_1.html#cb21-19" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.size =</span> <span class="dv">7</span>,</span>
+<span id="cb21-20"><a href="id_1.html#cb21-20" aria-hidden="true" tabindex="-1"></a>     <span class="at">edge.arrow.size =</span> .<span class="dv">05</span>,</span>
+<span id="cb21-21"><a href="id_1.html#cb21-21" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;Geodesic Distances from Patient Zero&quot;</span></span>
+<span id="cb21-22"><a href="id_1.html#cb21-22" aria-hidden="true" tabindex="-1"></a>     )</span></code></pre></div>
+<p><img src="2001-chapter02_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+</div>
+</div>
+<div id="id_1c" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> Network Structure<a href="id_1.html#id_1c" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="id_1c1" class="section level3 hasAnchor" number="3.3.1">
+<h3><span class="header-section-number">3.3.1</span> Basic Structure metrics<a href="id_1.html#id_1c1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><code>eigen_centrality()</code> : takes a graph (graph) and returns the eigenvector <a href="https://en.wikipedia.org/wiki/Eigenvector_centrality">centralities of positions</a> v within it</li>
+</ul>
+<p>You will use a social network based on the movie Forrest Gump. Each edge of the network indicates that those two characters were in at least one scene of the movie together. Therefore this network is undirected.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="id_1.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make an undirected network</span></span>
+<span id="cb22-2"><a href="id_1.html#cb22-2" aria-hidden="true" tabindex="-1"></a>g3 <span class="ot">&lt;-</span> <span class="fu">graph_from_data_frame</span>(gump, <span class="at">directed =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb22-3"><a href="id_1.html#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-4"><a href="id_1.html#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Identify key nodes using eigenvector centrality</span></span>
+<span id="cb22-5"><a href="id_1.html#cb22-5" aria-hidden="true" tabindex="-1"></a>g.ec <span class="ot">&lt;-</span> <span class="fu">eigen_centrality</span>(g3)</span>
+<span id="cb22-6"><a href="id_1.html#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="fu">which.max</span>(g.ec<span class="sc">$</span>vector)</span>
+<span id="cb22-7"><a href="id_1.html#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="do">## FORREST </span></span>
+<span id="cb22-8"><a href="id_1.html#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="do">##      36</span></span>
+<span id="cb22-9"><a href="id_1.html#cb22-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-10"><a href="id_1.html#cb22-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot Forrest Gump Network</span></span>
+<span id="cb22-11"><a href="id_1.html#cb22-11" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(g3,</span>
+<span id="cb22-12"><a href="id_1.html#cb22-12" aria-hidden="true" tabindex="-1"></a><span class="at">vertex.label.color =</span> <span class="st">&quot;black&quot;</span>, </span>
+<span id="cb22-13"><a href="id_1.html#cb22-13" aria-hidden="true" tabindex="-1"></a><span class="at">vertex.label.cex =</span> <span class="fl">0.6</span>,</span>
+<span id="cb22-14"><a href="id_1.html#cb22-14" aria-hidden="true" tabindex="-1"></a><span class="at">vertex.size =</span> <span class="dv">25</span><span class="sc">*</span>(g.ec<span class="sc">$</span>vector),</span>
+<span id="cb22-15"><a href="id_1.html#cb22-15" aria-hidden="true" tabindex="-1"></a><span class="at">edge.color =</span> <span class="st">&#39;gray88&#39;</span>,</span>
+<span id="cb22-16"><a href="id_1.html#cb22-16" aria-hidden="true" tabindex="-1"></a><span class="at">main =</span> <span class="st">&quot;Forrest Gump Network&quot;</span></span>
+<span id="cb22-17"><a href="id_1.html#cb22-17" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<p><img src="2001-chapter02_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<ul>
+<li><code>edge_density()</code> : calculate the edge density of the graph</li>
+<li><code>mean_distance()</code> : calculate the average path length of the graph</li>
+</ul>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="id_1.html#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get density of a graph</span></span>
+<span id="cb23-2"><a href="id_1.html#cb23-2" aria-hidden="true" tabindex="-1"></a>gd <span class="ot">&lt;-</span> <span class="fu">edge_density</span>(g3)</span>
+<span id="cb23-3"><a href="id_1.html#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="id_1.html#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="co"># The diameter of a graph is the length of the longest geodesic.</span></span>
+<span id="cb23-5"><a href="id_1.html#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="fu">diameter</span>(g3, <span class="at">directed =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb23-6"><a href="id_1.html#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 4</span></span>
+<span id="cb23-7"><a href="id_1.html#cb23-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-8"><a href="id_1.html#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the average path length of the graph g</span></span>
+<span id="cb23-9"><a href="id_1.html#cb23-9" aria-hidden="true" tabindex="-1"></a>g.apl <span class="ot">&lt;-</span> <span class="fu">mean_distance</span>(g3, <span class="at">directed =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb23-10"><a href="id_1.html#cb23-10" aria-hidden="true" tabindex="-1"></a>g.apl</span>
+<span id="cb23-11"><a href="id_1.html#cb23-11" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 1.994967</span></span></code></pre></div>
+</div>
+<div id="id_1c2" class="section level3 hasAnchor" number="3.3.2">
+<h3><span class="header-section-number">3.3.2</span> Random graphs<a href="id_1.html#id_1c2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Generating <a href="https://en.wikipedia.org/wiki/Random_graph">random graphs</a> is an important method for investigating how likely or unlikely other network metrics are likely to occur given certain properties of the original graph.</p>
+<p>The simplest random graph is one that has <strong>the same number of vertices</strong> as your original graph and approximately <strong>the same density</strong> as the original graph.(This entire paragraph is excerpted from the course)</p>
+<p><code>erdos.renyi.game()</code> : generate random graphs according to the <a href="https://en.wikipedia.org/wiki/Erd%C5%91s%E2%80%93R%C3%A9nyi_model">Erdos-Renyi model</a>, more function details on <a href="https://igraph.org/r/html/latest/erdos.renyi.game.html">igraph</a>.</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="id_1.html#cb24-1" aria-hidden="true" tabindex="-1"></a>g.random <span class="ot">&lt;-</span> <span class="fu">erdos.renyi.game</span>(<span class="at">n =</span> <span class="fu">gorder</span>(g3), <span class="at">p.or.m =</span> gd, <span class="at">type =</span> <span class="st">&quot;gnp&quot;</span>)</span>
+<span id="cb24-2"><a href="id_1.html#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="id_1.html#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(g.random, </span>
+<span id="cb24-4"><a href="id_1.html#cb24-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">vertex.label =</span> <span class="cn">NA</span>,</span>
+<span id="cb24-5"><a href="id_1.html#cb24-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">vertex.size =</span> <span class="dv">1</span>,</span>
+<span id="cb24-6"><a href="id_1.html#cb24-6" aria-hidden="true" tabindex="-1"></a>    )</span></code></pre></div>
+<p><img src="2001-chapter02_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="id_1.html#cb25-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-2"><a href="id_1.html#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Get density of new random graph `g.random`</span></span>
+<span id="cb25-3"><a href="id_1.html#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="fu">edge_density</span>(g.random)</span>
+<span id="cb25-4"><a href="id_1.html#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0.06634637</span></span>
+<span id="cb25-5"><a href="id_1.html#cb25-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-6"><a href="id_1.html#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the average path length of the random graph g.random</span></span>
+<span id="cb25-7"><a href="id_1.html#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="fu">mean_distance</span>(g.random, <span class="at">directed =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb25-8"><a href="id_1.html#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 2.673073</span></span></code></pre></div>
+</div>
+<div id="id_1c3" class="section level3 hasAnchor" number="3.3.3">
+<h3><span class="header-section-number">3.3.3</span> Randomization test<a href="id_1.html#id_1c3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The Forrest Gump network was smaller than the average path length of the random network, you can more formally address this by creating 1000 random graphs based on the number of vertices and density of the original Forrest Gump graph. Then, you can see how many times the average path length of the random graphs is less than the original Forrest Gump network. This is called a randomization test.(This entire paragraph is excerpted from the course)</p>
+<p><strong>Conclusion</strong> : the Forrest Gump network is far more interconnected than we would expect by chance.</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="id_1.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate 1000 random graphs</span></span>
+<span id="cb26-2"><a href="id_1.html#cb26-2" aria-hidden="true" tabindex="-1"></a>gl <span class="ot">&lt;-</span> <span class="fu">vector</span>(<span class="st">&#39;list&#39;</span>, <span class="dv">1000</span>)</span>
+<span id="cb26-3"><a href="id_1.html#cb26-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb26-4"><a href="id_1.html#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>){</span>
+<span id="cb26-5"><a href="id_1.html#cb26-5" aria-hidden="true" tabindex="-1"></a>  gl[[i]] <span class="ot">&lt;-</span> <span class="fu">erdos.renyi.game</span>(<span class="at">n =</span> <span class="fu">gorder</span>(g3), <span class="at">p.or.m =</span> gd, <span class="at">type =</span> <span class="st">&quot;gnp&quot;</span>)</span>
+<span id="cb26-6"><a href="id_1.html#cb26-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb26-7"><a href="id_1.html#cb26-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-8"><a href="id_1.html#cb26-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate average path length of 1000 random graphs</span></span>
+<span id="cb26-9"><a href="id_1.html#cb26-9" aria-hidden="true" tabindex="-1"></a>gl.apls <span class="ot">&lt;-</span> <span class="fu">unlist</span>(<span class="fu">lapply</span>(gl, mean_distance, <span class="at">directed =</span> <span class="cn">FALSE</span>))</span>
+<span id="cb26-10"><a href="id_1.html#cb26-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-11"><a href="id_1.html#cb26-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the distribution of average path lengths</span></span>
+<span id="cb26-12"><a href="id_1.html#cb26-12" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(gl.apls, <span class="at">xlim =</span> <span class="fu">range</span>(<span class="fu">c</span>(<span class="fl">1.5</span>, <span class="dv">6</span>)), <span class="at">breaks =</span> <span class="dv">5</span>)</span>
+<span id="cb26-13"><a href="id_1.html#cb26-13" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> <span class="fu">mean_distance</span>(g3,<span class="at">directed=</span><span class="cn">FALSE</span>), <span class="at">col =</span> <span class="st">&quot;red&quot;</span>, <span class="at">lty =</span> <span class="dv">3</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span></code></pre></div>
+<p><img src="2001-chapter02_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="id_1.html#cb27-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-2"><a href="id_1.html#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the proportion of graphs with an average path length lower than our observed</span></span>
+<span id="cb27-3"><a href="id_1.html#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(gl.apls <span class="sc">&lt;</span> <span class="fu">mean_distance</span>(g3,<span class="at">directed =</span> <span class="cn">FALSE</span>))</span>
+<span id="cb27-4"><a href="id_1.html#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0</span></span></code></pre></div>
+</div>
+<div id="id_1c4" class="section level3 hasAnchor" number="3.3.4">
+<h3><span class="header-section-number">3.3.4</span> Network substructures’ metrics<a href="id_1.html#id_1c4" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><p><code>triangles()</code> : find all closed triangles in the graph</p>
+<ul>
+<li><code>count_triangles()</code> : count how many triangles a vertex is part of, in a graph, or just list the triangles of a graph.</li>
+</ul></li>
+<li><p><code>transitivity()</code> : transitivity measures the probability that the adjacent vertices of a vertex are connected. You can use this function to get the global or local transitivity. Also, you can use randomization test to investigate if the global transitivity of the Forrest Gump network is significantly higher.(<strong>Conclusion</strong> : Yes)</p></li>
+<li><p>Clique : In a <a href="https://en.wikipedia.org/wiki/Clique_(graph_theory)">clique</a>, every vertex is connected to every other vertex.</p>
+<ul>
+<li><code>largest_cliques()</code> : identify the largest cliques in the network</li>
+<li><code>max_cliques()</code> : determine all the maximal cliques in the network</li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="id_1.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Show all triangles in the network. </span></span>
+<span id="cb28-2"><a href="id_1.html#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">matrix</span>(<span class="fu">triangles</span>(g3), <span class="at">nrow =</span> <span class="dv">3</span>)</span>
+<span id="cb28-3"><a href="id_1.html#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="do">##      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10] [,11] [,12] [,13] [,14]</span></span>
+<span id="cb28-4"><a href="id_1.html#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="do">## [1,]   36   36   36   36   36   36   36   36   36    36    36    36    36    36</span></span>
+<span id="cb28-5"><a href="id_1.html#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="do">## [2,]    1    1    1    1    2    4    4    6    6     6     6     7     7     8</span></span>
+<span id="cb28-6"><a href="id_1.html#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="do">## [3,]   83   38   39   66   68   57   24   27   75    40    45     8    69    69</span></span>
+<span id="cb28-7"><a href="id_1.html#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="do">##      [,15] [,16] [,17] [,18] [,19] [,20] [,21] [,22] [,23] [,24] [,25] [,26]</span></span>
+<span id="cb28-8"><a href="id_1.html#cb28-8" aria-hidden="true" tabindex="-1"></a><span class="do">## [1,]    36    36    36    36    36    36    36    36    36    36    36    36</span></span>
+<span id="cb28-9"><a href="id_1.html#cb28-9" aria-hidden="true" tabindex="-1"></a><span class="do">## [2,]    11    11    11    12    12    13    14    14    14    14    14    14</span></span>
+<span id="cb28-10"><a href="id_1.html#cb28-10" aria-hidden="true" tabindex="-1"></a><span class="do">## [3,]    12    13    70    70    13    70     4    19    24    71    65    57</span></span>
+<span id="cb28-11"><a href="id_1.html#cb28-11" aria-hidden="true" tabindex="-1"></a><span class="do">##      [,27] [,28] [,29] [,30] [,31] [,32] [,33] [,34] [,35] [,36] [,37] [,38]</span></span>
+<span id="cb28-12"><a href="id_1.html#cb28-12" aria-hidden="true" tabindex="-1"></a><span class="do">## [1,]    36    36    36    36    36    36    36    36    36    36    36    36</span></span>
+<span id="cb28-13"><a href="id_1.html#cb28-13" aria-hidden="true" tabindex="-1"></a><span class="do">## [2,]    14    14    14    15    15    17    17    18    18    19    19    21</span></span>
+<span id="cb28-14"><a href="id_1.html#cb28-14" aria-hidden="true" tabindex="-1"></a><span class="do">## [3,]    62    63    64    21    72    22    42     5    28    71    63    72</span></span>
+<span id="cb28-15"><a href="id_1.html#cb28-15" aria-hidden="true" tabindex="-1"></a><span class="do">##      [,39] [,40] [,41] [,42] [,43] [,44] [,45] [,46] [,47] [,48] [,49] [,50]</span></span>
+<span id="cb28-16"><a href="id_1.html#cb28-16" aria-hidden="true" tabindex="-1"></a><span class="do">## [1,]    36    36    36    36    36    36    36    36    36    36    36    36</span></span>
+<span id="cb28-17"><a href="id_1.html#cb28-17" aria-hidden="true" tabindex="-1"></a><span class="do">## [2,]    22    24    26    26    26    26    26    26    27    27    27    28</span></span>
+<span id="cb28-18"><a href="id_1.html#cb28-18" aria-hidden="true" tabindex="-1"></a><span class="do">## [3,]    42    57    73    52    47    48    49    50    75    45    40     5</span></span>
+<span id="cb28-19"><a href="id_1.html#cb28-19" aria-hidden="true" tabindex="-1"></a><span class="do">##      [,51] [,52] [,53] [,54] [,55] [,56] [,57] [,58] [,59] [,60] [,61] [,62]</span></span>
+<span id="cb28-20"><a href="id_1.html#cb28-20" aria-hidden="true" tabindex="-1"></a><span class="do">## [1,]    36    36    36    36    36    36    36    36    36    36    36    36</span></span>
+<span id="cb28-21"><a href="id_1.html#cb28-21" aria-hidden="true" tabindex="-1"></a><span class="do">## [2,]    28    30    30    30    34    38    38    38    39    39    40    40</span></span>
+<span id="cb28-22"><a href="id_1.html#cb28-22" aria-hidden="true" tabindex="-1"></a><span class="do">## [3,]    90    84    61    51    88    83    66    39    83    66    75    45</span></span>
+<span id="cb28-23"><a href="id_1.html#cb28-23" aria-hidden="true" tabindex="-1"></a><span class="do">##      [,63] [,64] [,65] [,66] [,67] [,68] [,69] [,70] [,71] [,72] [,73] [,74]</span></span>
+<span id="cb28-24"><a href="id_1.html#cb28-24" aria-hidden="true" tabindex="-1"></a><span class="do">## [1,]    36    36    36    36    36    36    36    36    36    36    36    36</span></span>
+<span id="cb28-25"><a href="id_1.html#cb28-25" aria-hidden="true" tabindex="-1"></a><span class="do">## [2,]    41    41    41    41    41    41    41    41    41    41    41    41</span></span>
+<span id="cb28-26"><a href="id_1.html#cb28-26" aria-hidden="true" tabindex="-1"></a><span class="do">## [3,]     1     3     6     7     8    11    12    13    26    27    30    32</span></span>
+<span id="cb28-27"><a href="id_1.html#cb28-27" aria-hidden="true" tabindex="-1"></a><span class="do">##      [,75] [,76] [,77] [,78] [,79] [,80] [,81] [,82] [,83] [,84] [,85] [,86]</span></span>
+<span id="cb28-28"><a href="id_1.html#cb28-28" aria-hidden="true" tabindex="-1"></a><span class="do">## [1,]    36    36    36    36    36    36    36    36    36    36    36    36</span></span>
+<span id="cb28-29"><a href="id_1.html#cb28-29" aria-hidden="true" tabindex="-1"></a><span class="do">## [2,]    41    41    41    41    41    41    41    41    41    41    41    41</span></span>
+<span id="cb28-30"><a href="id_1.html#cb28-30" aria-hidden="true" tabindex="-1"></a><span class="do">## [3,]    33    86    37    38    39    40    43    44    45    47    48    49</span></span>
+<span id="cb28-31"><a href="id_1.html#cb28-31" aria-hidden="true" tabindex="-1"></a><span class="do">##      [,87] [,88] [,89] [,90] [,91] [,92] [,93] [,94] [,95] [,96] [,97] [,98]</span></span>
+<span id="cb28-32"><a href="id_1.html#cb28-32" aria-hidden="true" tabindex="-1"></a><span class="do">## [1,]    36    36    36    36    36    36    36    36    36    36    36    36</span></span>
+<span id="cb28-33"><a href="id_1.html#cb28-33" aria-hidden="true" tabindex="-1"></a><span class="do">## [2,]    41    41    41    41    41    41    41    41    41    41    41    41</span></span>
+<span id="cb28-34"><a href="id_1.html#cb28-34" aria-hidden="true" tabindex="-1"></a><span class="do">## [3,]    50    51    52    53    54    56    58    61    66    69    70    73</span></span>
+<span id="cb28-35"><a href="id_1.html#cb28-35" aria-hidden="true" tabindex="-1"></a><span class="do">##      [,99] [,100] [,101] [,102] [,103] [,104] [,105] [,106] [,107] [,108]</span></span>
+<span id="cb28-36"><a href="id_1.html#cb28-36" aria-hidden="true" tabindex="-1"></a><span class="do">## [1,]    36     36     36     36     36     36     36     36     36     36</span></span>
+<span id="cb28-37"><a href="id_1.html#cb28-37" aria-hidden="true" tabindex="-1"></a><span class="do">## [2,]    41     41     41     41     41     41     43     43     43     44</span></span>
+<span id="cb28-38"><a href="id_1.html#cb28-38" aria-hidden="true" tabindex="-1"></a><span class="do">## [3,]    74     75     79     82     83     84     82     54     53      2</span></span>
+<span id="cb28-39"><a href="id_1.html#cb28-39" aria-hidden="true" tabindex="-1"></a><span class="do">##      [,109] [,110] [,111] [,112] [,113] [,114] [,115] [,116] [,117] [,118]</span></span>
+<span id="cb28-40"><a href="id_1.html#cb28-40" aria-hidden="true" tabindex="-1"></a><span class="do">## [1,]     36     36     36     36     36     36     36     36     36     36</span></span>
+<span id="cb28-41"><a href="id_1.html#cb28-41" aria-hidden="true" tabindex="-1"></a><span class="do">## [2,]     44     44     44     44     44     44     44     44     44     44</span></span>
+<span id="cb28-42"><a href="id_1.html#cb28-42" aria-hidden="true" tabindex="-1"></a><span class="do">## [3,]      3      9     14     17     19     22     82     71     42     43</span></span>
+<span id="cb28-43"><a href="id_1.html#cb28-43" aria-hidden="true" tabindex="-1"></a><span class="do">##      [,119] [,120] [,121] [,122] [,123] [,124] [,125] [,126] [,127] [,128]</span></span>
+<span id="cb28-44"><a href="id_1.html#cb28-44" aria-hidden="true" tabindex="-1"></a><span class="do">## [1,]     36     36     36     36     36     36     36     36     36     36</span></span>
+<span id="cb28-45"><a href="id_1.html#cb28-45" aria-hidden="true" tabindex="-1"></a><span class="do">## [2,]     44     44     44     44     44     45     47     47     47     47</span></span>
+<span id="cb28-46"><a href="id_1.html#cb28-46" aria-hidden="true" tabindex="-1"></a><span class="do">## [3,]     53     62     63     64     65     75     73     52     50     48</span></span>
+<span id="cb28-47"><a href="id_1.html#cb28-47" aria-hidden="true" tabindex="-1"></a><span class="do">##      [,129] [,130] [,131] [,132] [,133] [,134] [,135] [,136] [,137] [,138]</span></span>
+<span id="cb28-48"><a href="id_1.html#cb28-48" aria-hidden="true" tabindex="-1"></a><span class="do">## [1,]     36     36     36     36     36     36     36     36     36     36</span></span>
+<span id="cb28-49"><a href="id_1.html#cb28-49" aria-hidden="true" tabindex="-1"></a><span class="do">## [2,]     47     48     48     48     48     49     49     49     50     50</span></span>
+<span id="cb28-50"><a href="id_1.html#cb28-50" aria-hidden="true" tabindex="-1"></a><span class="do">## [3,]     49     73     52     50     49     73     52     50     73     52</span></span>
+<span id="cb28-51"><a href="id_1.html#cb28-51" aria-hidden="true" tabindex="-1"></a><span class="do">##      [,139] [,140] [,141] [,142] [,143] [,144] [,145] [,146] [,147] [,148]</span></span>
+<span id="cb28-52"><a href="id_1.html#cb28-52" aria-hidden="true" tabindex="-1"></a><span class="do">## [1,]     36     36     36     36     36     36     36     36     36     36</span></span>
+<span id="cb28-53"><a href="id_1.html#cb28-53" aria-hidden="true" tabindex="-1"></a><span class="do">## [2,]     51     51     52     53     54     54     56     58     59     60</span></span>
+<span id="cb28-54"><a href="id_1.html#cb28-54" aria-hidden="true" tabindex="-1"></a><span class="do">## [3,]     84     61     73     82     87     56     89     79     92      2</span></span>
+<span id="cb28-55"><a href="id_1.html#cb28-55" aria-hidden="true" tabindex="-1"></a><span class="do">##      [,149] [,150] [,151] [,152] [,153] [,154] [,155] [,156] [,157] [,158]</span></span>
+<span id="cb28-56"><a href="id_1.html#cb28-56" aria-hidden="true" tabindex="-1"></a><span class="do">## [1,]     36     36     36     36     36     36     36     36     36     36</span></span>
+<span id="cb28-57"><a href="id_1.html#cb28-57" aria-hidden="true" tabindex="-1"></a><span class="do">## [2,]     60     60     60     60     60     60     61     62     62     62</span></span>
+<span id="cb28-58"><a href="id_1.html#cb28-58" aria-hidden="true" tabindex="-1"></a><span class="do">## [3,]     20     23     25     31     81     43     84     71     19     35</span></span>
+<span id="cb28-59"><a href="id_1.html#cb28-59" aria-hidden="true" tabindex="-1"></a><span class="do">##      [,159] [,160] [,161] [,162] [,163] [,164] [,165] [,166] [,167] [,168]</span></span>
+<span id="cb28-60"><a href="id_1.html#cb28-60" aria-hidden="true" tabindex="-1"></a><span class="do">## [1,]     36     36     36     36     36     36     36     36     36     36</span></span>
+<span id="cb28-61"><a href="id_1.html#cb28-61" aria-hidden="true" tabindex="-1"></a><span class="do">## [2,]     62     63     64     64     64     64     64     64     65     65</span></span>
+<span id="cb28-62"><a href="id_1.html#cb28-62" aria-hidden="true" tabindex="-1"></a><span class="do">## [3,]     63     71      3     71     19     63     62     46      4     71</span></span>
+<span id="cb28-63"><a href="id_1.html#cb28-63" aria-hidden="true" tabindex="-1"></a><span class="do">##      [,169] [,170] [,171] [,172] [,173] [,174] [,175] [,176] [,177] [,178]</span></span>
+<span id="cb28-64"><a href="id_1.html#cb28-64" aria-hidden="true" tabindex="-1"></a><span class="do">## [1,]     36     36     36     36     36     36     36     41     41     41</span></span>
+<span id="cb28-65"><a href="id_1.html#cb28-65" aria-hidden="true" tabindex="-1"></a><span class="do">## [2,]     65     65     65     65     65     65     66      1      1      1</span></span>
+<span id="cb28-66"><a href="id_1.html#cb28-66" aria-hidden="true" tabindex="-1"></a><span class="do">## [3,]     19     24     64     63     57     62     83     83     38     39</span></span>
+<span id="cb28-67"><a href="id_1.html#cb28-67" aria-hidden="true" tabindex="-1"></a><span class="do">##      [,179] [,180] [,181] [,182] [,183] [,184] [,185] [,186] [,187] [,188]</span></span>
+<span id="cb28-68"><a href="id_1.html#cb28-68" aria-hidden="true" tabindex="-1"></a><span class="do">## [1,]     41     41     41     41     41     41     41     41     41     41</span></span>
+<span id="cb28-69"><a href="id_1.html#cb28-69" aria-hidden="true" tabindex="-1"></a><span class="do">## [2,]      1      6      6      6      6      7      7      8     11     11</span></span>
+<span id="cb28-70"><a href="id_1.html#cb28-70" aria-hidden="true" tabindex="-1"></a><span class="do">## [3,]     66     27     75     40     45      8     69     69     12     13</span></span>
+<span id="cb28-71"><a href="id_1.html#cb28-71" aria-hidden="true" tabindex="-1"></a><span class="do">##      [,189] [,190] [,191] [,192] [,193] [,194] [,195] [,196] [,197] [,198]</span></span>
+<span id="cb28-72"><a href="id_1.html#cb28-72" aria-hidden="true" tabindex="-1"></a><span class="do">## [1,]     41     41     41     41     41     41     41     41     41     41</span></span>
+<span id="cb28-73"><a href="id_1.html#cb28-73" aria-hidden="true" tabindex="-1"></a><span class="do">## [2,]     11     12     12     13     26     26     26     26     26     26</span></span>
+<span id="cb28-74"><a href="id_1.html#cb28-74" aria-hidden="true" tabindex="-1"></a><span class="do">## [3,]     70     70     13     70     73     52     47     48     49     50</span></span>
+<span id="cb28-75"><a href="id_1.html#cb28-75" aria-hidden="true" tabindex="-1"></a><span class="do">##      [,199] [,200] [,201] [,202] [,203] [,204] [,205] [,206] [,207] [,208]</span></span>
+<span id="cb28-76"><a href="id_1.html#cb28-76" aria-hidden="true" tabindex="-1"></a><span class="do">## [1,]     41     41     41     41     41     41     41     41     41     41</span></span>
+<span id="cb28-77"><a href="id_1.html#cb28-77" aria-hidden="true" tabindex="-1"></a><span class="do">## [2,]     27     27     27     30     30     30     38     38     38     39</span></span>
+<span id="cb28-78"><a href="id_1.html#cb28-78" aria-hidden="true" tabindex="-1"></a><span class="do">## [3,]     75     45     40     84     61     51     83     66     39     83</span></span>
+<span id="cb28-79"><a href="id_1.html#cb28-79" aria-hidden="true" tabindex="-1"></a><span class="do">##      [,209] [,210] [,211] [,212] [,213] [,214] [,215] [,216] [,217] [,218]</span></span>
+<span id="cb28-80"><a href="id_1.html#cb28-80" aria-hidden="true" tabindex="-1"></a><span class="do">## [1,]     41     41     41     41     41     41     41     41     41     41</span></span>
+<span id="cb28-81"><a href="id_1.html#cb28-81" aria-hidden="true" tabindex="-1"></a><span class="do">## [2,]     39     40     40     43     43     43     44     44     44     44</span></span>
+<span id="cb28-82"><a href="id_1.html#cb28-82" aria-hidden="true" tabindex="-1"></a><span class="do">## [3,]     66     75     45     82     54     53      3     82     43     53</span></span>
+<span id="cb28-83"><a href="id_1.html#cb28-83" aria-hidden="true" tabindex="-1"></a><span class="do">##      [,219] [,220] [,221] [,222] [,223] [,224] [,225] [,226] [,227] [,228]</span></span>
+<span id="cb28-84"><a href="id_1.html#cb28-84" aria-hidden="true" tabindex="-1"></a><span class="do">## [1,]     41     41     41     41     41     41     41     41     41     41</span></span>
+<span id="cb28-85"><a href="id_1.html#cb28-85" aria-hidden="true" tabindex="-1"></a><span class="do">## [2,]     45     47     47     47     47     47     48     48     48     48</span></span>
+<span id="cb28-86"><a href="id_1.html#cb28-86" aria-hidden="true" tabindex="-1"></a><span class="do">## [3,]     75     73     52     50     48     49     73     52     50     49</span></span>
+<span id="cb28-87"><a href="id_1.html#cb28-87" aria-hidden="true" tabindex="-1"></a><span class="do">##      [,229] [,230] [,231] [,232] [,233] [,234] [,235] [,236] [,237] [,238]</span></span>
+<span id="cb28-88"><a href="id_1.html#cb28-88" aria-hidden="true" tabindex="-1"></a><span class="do">## [1,]     41     41     41     41     41     41     41     41     41     41</span></span>
+<span id="cb28-89"><a href="id_1.html#cb28-89" aria-hidden="true" tabindex="-1"></a><span class="do">## [2,]     49     49     49     50     50     51     51     52     53     54</span></span>
+<span id="cb28-90"><a href="id_1.html#cb28-90" aria-hidden="true" tabindex="-1"></a><span class="do">## [3,]     73     52     50     73     52     84     61     73     82     56</span></span>
+<span id="cb28-91"><a href="id_1.html#cb28-91" aria-hidden="true" tabindex="-1"></a><span class="do">##      [,239] [,240] [,241] [,242] [,243] [,244] [,245] [,246] [,247] [,248]</span></span>
+<span id="cb28-92"><a href="id_1.html#cb28-92" aria-hidden="true" tabindex="-1"></a><span class="do">## [1,]     41     41     41     41     44     44     44     44     44     44</span></span>
+<span id="cb28-93"><a href="id_1.html#cb28-93" aria-hidden="true" tabindex="-1"></a><span class="do">## [2,]     58     58     61     66      2     14     14     14     14     14</span></span>
+<span id="cb28-94"><a href="id_1.html#cb28-94" aria-hidden="true" tabindex="-1"></a><span class="do">## [3,]     10     79     84     83     67     19     71     65     62     63</span></span>
+<span id="cb28-95"><a href="id_1.html#cb28-95" aria-hidden="true" tabindex="-1"></a><span class="do">##      [,249] [,250] [,251] [,252] [,253] [,254] [,255] [,256] [,257] [,258]</span></span>
+<span id="cb28-96"><a href="id_1.html#cb28-96" aria-hidden="true" tabindex="-1"></a><span class="do">## [1,]     44     44     44     44     44     44     44     44     44     44</span></span>
+<span id="cb28-97"><a href="id_1.html#cb28-97" aria-hidden="true" tabindex="-1"></a><span class="do">## [2,]     14     17     17     19     19     22     43     43     53     62</span></span>
+<span id="cb28-98"><a href="id_1.html#cb28-98" aria-hidden="true" tabindex="-1"></a><span class="do">## [3,]     64     22     42     71     63     42     82     53     82     71</span></span>
+<span id="cb28-99"><a href="id_1.html#cb28-99" aria-hidden="true" tabindex="-1"></a><span class="do">##      [,259] [,260] [,261] [,262] [,263] [,264] [,265] [,266] [,267] [,268]</span></span>
+<span id="cb28-100"><a href="id_1.html#cb28-100" aria-hidden="true" tabindex="-1"></a><span class="do">## [1,]     44     44     44     44     44     44     44     44     44     44</span></span>
+<span id="cb28-101"><a href="id_1.html#cb28-101" aria-hidden="true" tabindex="-1"></a><span class="do">## [2,]     62     62     63     64     64     64     64     64     65     65</span></span>
+<span id="cb28-102"><a href="id_1.html#cb28-102" aria-hidden="true" tabindex="-1"></a><span class="do">## [3,]     19     63     71      3     71     19     63     62     71     19</span></span>
+<span id="cb28-103"><a href="id_1.html#cb28-103" aria-hidden="true" tabindex="-1"></a><span class="do">##      [,269] [,270] [,271] [,272] [,273] [,274] [,275] [,276] [,277] [,278]</span></span>
+<span id="cb28-104"><a href="id_1.html#cb28-104" aria-hidden="true" tabindex="-1"></a><span class="do">## [1,]     44     44     44     14     14     14     14     14     14     14</span></span>
+<span id="cb28-105"><a href="id_1.html#cb28-105" aria-hidden="true" tabindex="-1"></a><span class="do">## [2,]     65     65     65      4      4     19     19     24     65     65</span></span>
+<span id="cb28-106"><a href="id_1.html#cb28-106" aria-hidden="true" tabindex="-1"></a><span class="do">## [3,]     64     63     62     57     24     71     63     57      4     71</span></span>
+<span id="cb28-107"><a href="id_1.html#cb28-107" aria-hidden="true" tabindex="-1"></a><span class="do">##      [,279] [,280] [,281] [,282] [,283] [,284] [,285] [,286] [,287] [,288]</span></span>
+<span id="cb28-108"><a href="id_1.html#cb28-108" aria-hidden="true" tabindex="-1"></a><span class="do">## [1,]     14     14     14     14     14     14     14     14     14     14</span></span>
+<span id="cb28-109"><a href="id_1.html#cb28-109" aria-hidden="true" tabindex="-1"></a><span class="do">## [2,]     65     65     65     65     65     65     62     62     62     63</span></span>
+<span id="cb28-110"><a href="id_1.html#cb28-110" aria-hidden="true" tabindex="-1"></a><span class="do">## [3,]     19     24     64     63     57     62     71     19     63     71</span></span>
+<span id="cb28-111"><a href="id_1.html#cb28-111" aria-hidden="true" tabindex="-1"></a><span class="do">##      [,289] [,290] [,291] [,292] [,293] [,294] [,295] [,296] [,297] [,298]</span></span>
+<span id="cb28-112"><a href="id_1.html#cb28-112" aria-hidden="true" tabindex="-1"></a><span class="do">## [1,]     14     14     14     14     65     65     65     65     65     65</span></span>
+<span id="cb28-113"><a href="id_1.html#cb28-113" aria-hidden="true" tabindex="-1"></a><span class="do">## [2,]     64     64     64     64      4      4     19     19     24     64</span></span>
+<span id="cb28-114"><a href="id_1.html#cb28-114" aria-hidden="true" tabindex="-1"></a><span class="do">## [3,]     71     19     63     62     57     24     71     63     57     71</span></span>
+<span id="cb28-115"><a href="id_1.html#cb28-115" aria-hidden="true" tabindex="-1"></a><span class="do">##      [,299] [,300] [,301] [,302] [,303] [,304] [,305] [,306] [,307] [,308]</span></span>
+<span id="cb28-116"><a href="id_1.html#cb28-116" aria-hidden="true" tabindex="-1"></a><span class="do">## [1,]     65     65     65     65     65     65     65     64     64     64</span></span>
+<span id="cb28-117"><a href="id_1.html#cb28-117" aria-hidden="true" tabindex="-1"></a><span class="do">## [2,]     64     64     64     63     62     62     62     19     19     63</span></span>
+<span id="cb28-118"><a href="id_1.html#cb28-118" aria-hidden="true" tabindex="-1"></a><span class="do">## [3,]     19     63     62     71     71     19     63     71     63     71</span></span>
+<span id="cb28-119"><a href="id_1.html#cb28-119" aria-hidden="true" tabindex="-1"></a><span class="do">##      [,309] [,310] [,311] [,312] [,313] [,314] [,315] [,316] [,317] [,318]</span></span>
+<span id="cb28-120"><a href="id_1.html#cb28-120" aria-hidden="true" tabindex="-1"></a><span class="do">## [1,]     64     64     64     62     62     62     19     26     26     26</span></span>
+<span id="cb28-121"><a href="id_1.html#cb28-121" aria-hidden="true" tabindex="-1"></a><span class="do">## [2,]     62     62     62     19     19     63     63     52     47     47</span></span>
+<span id="cb28-122"><a href="id_1.html#cb28-122" aria-hidden="true" tabindex="-1"></a><span class="do">## [3,]     71     19     63     71     63     71     71     73     73     52</span></span>
+<span id="cb28-123"><a href="id_1.html#cb28-123" aria-hidden="true" tabindex="-1"></a><span class="do">##      [,319] [,320] [,321] [,322] [,323] [,324] [,325] [,326] [,327] [,328]</span></span>
+<span id="cb28-124"><a href="id_1.html#cb28-124" aria-hidden="true" tabindex="-1"></a><span class="do">## [1,]     26     26     26     26     26     26     26     26     26     26</span></span>
+<span id="cb28-125"><a href="id_1.html#cb28-125" aria-hidden="true" tabindex="-1"></a><span class="do">## [2,]     47     47     47     48     48     48     48     49     49     49</span></span>
+<span id="cb28-126"><a href="id_1.html#cb28-126" aria-hidden="true" tabindex="-1"></a><span class="do">## [3,]     50     48     49     73     52     50     49     73     52     50</span></span>
+<span id="cb28-127"><a href="id_1.html#cb28-127" aria-hidden="true" tabindex="-1"></a><span class="do">##      [,329] [,330] [,331] [,332] [,333] [,334] [,335] [,336] [,337] [,338]</span></span>
+<span id="cb28-128"><a href="id_1.html#cb28-128" aria-hidden="true" tabindex="-1"></a><span class="do">## [1,]     26     26     47     47     47     47     47     47     47     47</span></span>
+<span id="cb28-129"><a href="id_1.html#cb28-129" aria-hidden="true" tabindex="-1"></a><span class="do">## [2,]     50     50     52     50     50     48     48     48     48     49</span></span>
+<span id="cb28-130"><a href="id_1.html#cb28-130" aria-hidden="true" tabindex="-1"></a><span class="do">## [3,]     73     52     73     73     52     73     52     50     49     73</span></span>
+<span id="cb28-131"><a href="id_1.html#cb28-131" aria-hidden="true" tabindex="-1"></a><span class="do">##      [,339] [,340] [,341] [,342] [,343] [,344] [,345] [,346] [,347] [,348]</span></span>
+<span id="cb28-132"><a href="id_1.html#cb28-132" aria-hidden="true" tabindex="-1"></a><span class="do">## [1,]     47     47     48     48     48     48     48     48     49     49</span></span>
+<span id="cb28-133"><a href="id_1.html#cb28-133" aria-hidden="true" tabindex="-1"></a><span class="do">## [2,]     49     49     52     50     50     49     49     49     52     50</span></span>
+<span id="cb28-134"><a href="id_1.html#cb28-134" aria-hidden="true" tabindex="-1"></a><span class="do">## [3,]     52     50     73     73     52     73     52     50     73     73</span></span>
+<span id="cb28-135"><a href="id_1.html#cb28-135" aria-hidden="true" tabindex="-1"></a><span class="do">##      [,349] [,350] [,351] [,352] [,353] [,354] [,355] [,356] [,357] [,358]</span></span>
+<span id="cb28-136"><a href="id_1.html#cb28-136" aria-hidden="true" tabindex="-1"></a><span class="do">## [1,]     49     50     43      1      1      1      1      1      1      6</span></span>
+<span id="cb28-137"><a href="id_1.html#cb28-137" aria-hidden="true" tabindex="-1"></a><span class="do">## [2,]     50     52     53     38     38     38     39     39     66     27</span></span>
+<span id="cb28-138"><a href="id_1.html#cb28-138" aria-hidden="true" tabindex="-1"></a><span class="do">## [3,]     52     73     82     83     66     39     83     66     83     75</span></span>
+<span id="cb28-139"><a href="id_1.html#cb28-139" aria-hidden="true" tabindex="-1"></a><span class="do">##      [,359] [,360] [,361] [,362] [,363] [,364] [,365] [,366] [,367] [,368]</span></span>
+<span id="cb28-140"><a href="id_1.html#cb28-140" aria-hidden="true" tabindex="-1"></a><span class="do">## [1,]      6      6      6      6      6     27     27     27     38     38</span></span>
+<span id="cb28-141"><a href="id_1.html#cb28-141" aria-hidden="true" tabindex="-1"></a><span class="do">## [2,]     27     27     40     40     45     45     40     40     66     39</span></span>
+<span id="cb28-142"><a href="id_1.html#cb28-142" aria-hidden="true" tabindex="-1"></a><span class="do">## [3,]     45     40     75     45     75     75     75     45     83     83</span></span>
+<span id="cb28-143"><a href="id_1.html#cb28-143" aria-hidden="true" tabindex="-1"></a><span class="do">##      [,369] [,370] [,371] [,372] [,373] [,374] [,375] [,376] [,377] [,378]</span></span>
+<span id="cb28-144"><a href="id_1.html#cb28-144" aria-hidden="true" tabindex="-1"></a><span class="do">## [1,]     38     39     40      4     11     11     11     12     30     30</span></span>
+<span id="cb28-145"><a href="id_1.html#cb28-145" aria-hidden="true" tabindex="-1"></a><span class="do">## [2,]     39     66     45     24     12     12     13     13     61     51</span></span>
+<span id="cb28-146"><a href="id_1.html#cb28-146" aria-hidden="true" tabindex="-1"></a><span class="do">## [3,]     66     83     75     57     70     13     70     70     84     84</span></span>
+<span id="cb28-147"><a href="id_1.html#cb28-147" aria-hidden="true" tabindex="-1"></a><span class="do">##      [,379] [,380] [,381] [,382] [,383] [,384]</span></span>
+<span id="cb28-148"><a href="id_1.html#cb28-148" aria-hidden="true" tabindex="-1"></a><span class="do">## [1,]     30     51      7     17     18     15</span></span>
+<span id="cb28-149"><a href="id_1.html#cb28-149" aria-hidden="true" tabindex="-1"></a><span class="do">## [2,]     51     61      8     22     28     21</span></span>
+<span id="cb28-150"><a href="id_1.html#cb28-150" aria-hidden="true" tabindex="-1"></a><span class="do">## [3,]     61     84     69     42      5     72</span></span>
+<span id="cb28-151"><a href="id_1.html#cb28-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-152"><a href="id_1.html#cb28-152" aria-hidden="true" tabindex="-1"></a><span class="co"># Count the number of triangles that vertex &quot;BUBBA&quot; is in.</span></span>
+<span id="cb28-153"><a href="id_1.html#cb28-153" aria-hidden="true" tabindex="-1"></a><span class="fu">count_triangles</span>(g3, <span class="at">vids=</span><span class="st">&#39;BUBBA&#39;</span>)</span>
+<span id="cb28-154"><a href="id_1.html#cb28-154" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 37</span></span>
+<span id="cb28-155"><a href="id_1.html#cb28-155" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-156"><a href="id_1.html#cb28-156" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate  the global transitivity of the network.</span></span>
+<span id="cb28-157"><a href="id_1.html#cb28-157" aria-hidden="true" tabindex="-1"></a>g.tr <span class="ot">&lt;-</span> <span class="fu">transitivity</span>(g3)</span>
+<span id="cb28-158"><a href="id_1.html#cb28-158" aria-hidden="true" tabindex="-1"></a>g.tr</span>
+<span id="cb28-159"><a href="id_1.html#cb28-159" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0.1918082</span></span>
+<span id="cb28-160"><a href="id_1.html#cb28-160" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-161"><a href="id_1.html#cb28-161" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the local transitivity for vertex BOB HOPE.</span></span>
+<span id="cb28-162"><a href="id_1.html#cb28-162" aria-hidden="true" tabindex="-1"></a><span class="fu">transitivity</span>(g3, <span class="at">vids=</span><span class="st">&#39;BOB HOPE&#39;</span>, <span class="at">type =</span> <span class="st">&quot;local&quot;</span>)</span>
+<span id="cb28-163"><a href="id_1.html#cb28-163" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 1</span></span>
+<span id="cb28-164"><a href="id_1.html#cb28-164" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-165"><a href="id_1.html#cb28-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-166"><a href="id_1.html#cb28-166" aria-hidden="true" tabindex="-1"></a>gl.tr <span class="ot">&lt;-</span> <span class="fu">lapply</span>(gl, transitivity)</span>
+<span id="cb28-167"><a href="id_1.html#cb28-167" aria-hidden="true" tabindex="-1"></a>gl.trs <span class="ot">&lt;-</span> <span class="fu">unlist</span>(gl.tr)</span>
+<span id="cb28-168"><a href="id_1.html#cb28-168" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-169"><a href="id_1.html#cb28-169" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-170"><a href="id_1.html#cb28-170" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the proportion of graphs with a transitivity score higher than Forrest Gump&#39;s network</span></span>
+<span id="cb28-171"><a href="id_1.html#cb28-171" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(gl.trs <span class="sc">&gt;</span> g.tr)</span>
+<span id="cb28-172"><a href="id_1.html#cb28-172" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0</span></span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="id_1.html#cb29-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-2"><a href="id_1.html#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">largest_cliques</span>(g3)</span>
+<span id="cb29-3"><a href="id_1.html#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="do">## [[1]]</span></span>
+<span id="cb29-4"><a href="id_1.html#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="do">## + 9/94 vertices, named, from f2132b6:</span></span>
+<span id="cb29-5"><a href="id_1.html#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] EMCEE   FORREST MEN     MAN #5  MAN #3  MAN #2  MAN #1  MAN #   JENNY  </span></span>
+<span id="cb29-6"><a href="id_1.html#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb29-7"><a href="id_1.html#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="do">## [[2]]</span></span>
+<span id="cb29-8"><a href="id_1.html#cb29-8" aria-hidden="true" tabindex="-1"></a><span class="do">## + 9/94 vertices, named, from f2132b6:</span></span>
+<span id="cb29-9"><a href="id_1.html#cb29-9" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] FORREST   LT DAN    STRONGARM SONG      SOLDIER   SGT SIMS  MAN      </span></span>
+<span id="cb29-10"><a href="id_1.html#cb29-10" aria-hidden="true" tabindex="-1"></a><span class="do">## [8] DALLAS    BUBBA</span></span>
+<span id="cb29-11"><a href="id_1.html#cb29-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-12"><a href="id_1.html#cb29-12" aria-hidden="true" tabindex="-1"></a>clq <span class="ot">&lt;-</span> <span class="fu">max_cliques</span>(g3) <span class="co"># some confusing in function name</span></span>
+<span id="cb29-13"><a href="id_1.html#cb29-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-14"><a href="id_1.html#cb29-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the size of each maximal clique.</span></span>
+<span id="cb29-15"><a href="id_1.html#cb29-15" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(<span class="fu">unlist</span>(<span class="fu">lapply</span>(clq, length)))</span>
+<span id="cb29-16"><a href="id_1.html#cb29-16" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb29-17"><a href="id_1.html#cb29-17" aria-hidden="true" tabindex="-1"></a><span class="do">##  2  3  4  5  6  7  9 </span></span>
+<span id="cb29-18"><a href="id_1.html#cb29-18" aria-hidden="true" tabindex="-1"></a><span class="do">## 12 24  7  2  4  2  2</span></span></code></pre></div>
+</div>
+<div id="id_1c5" class="section level3 hasAnchor" number="3.3.5">
+<h3><span class="header-section-number">3.3.5</span> Visualize largest cliques<a href="id_1.html#id_1c5" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Steps are:
+- You need get the largest cliques(may not one)
+- Subset from the original graph
+- Plot it with circle layout</p>
+<p>Then you can change some arguments in plot function, I want to make them simple .</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="id_1.html#cb30-1" aria-hidden="true" tabindex="-1"></a>lc <span class="ot">&lt;-</span> <span class="fu">largest_cliques</span>(g3)</span>
+<span id="cb30-2"><a href="id_1.html#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-3"><a href="id_1.html#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create two new undirected subgraphs, each containing only the vertices of each largest clique.</span></span>
+<span id="cb30-4"><a href="id_1.html#cb30-4" aria-hidden="true" tabindex="-1"></a>gs1 <span class="ot">&lt;-</span> <span class="fu">as.undirected</span>(<span class="fu">subgraph</span>(g3, lc[[<span class="dv">1</span>]]))</span>
+<span id="cb30-5"><a href="id_1.html#cb30-5" aria-hidden="true" tabindex="-1"></a>gs2 <span class="ot">&lt;-</span> <span class="fu">as.undirected</span>(<span class="fu">subgraph</span>(g3, lc[[<span class="dv">2</span>]]))</span>
+<span id="cb30-6"><a href="id_1.html#cb30-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-7"><a href="id_1.html#cb30-7" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)) <span class="co"># To plot two plots side-by-side</span></span>
+<span id="cb30-8"><a href="id_1.html#cb30-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-9"><a href="id_1.html#cb30-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(gs1,</span>
+<span id="cb30-10"><a href="id_1.html#cb30-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label =</span> <span class="cn">NA</span>, </span>
+<span id="cb30-11"><a href="id_1.html#cb30-11" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.size =</span> <span class="dv">0</span>,</span>
+<span id="cb30-12"><a href="id_1.html#cb30-12" aria-hidden="true" tabindex="-1"></a>     <span class="at">edge.color =</span> <span class="st">&#39;gray28&#39;</span>,</span>
+<span id="cb30-13"><a href="id_1.html#cb30-13" aria-hidden="true" tabindex="-1"></a>     <span class="co">#main = &quot;Largest Clique 1&quot;,</span></span>
+<span id="cb30-14"><a href="id_1.html#cb30-14" aria-hidden="true" tabindex="-1"></a>     <span class="at">layout =</span> <span class="fu">layout.circle</span>(gs1)</span>
+<span id="cb30-15"><a href="id_1.html#cb30-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb30-16"><a href="id_1.html#cb30-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-17"><a href="id_1.html#cb30-17" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(gs2,</span>
+<span id="cb30-18"><a href="id_1.html#cb30-18" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label =</span> <span class="cn">NA</span>, </span>
+<span id="cb30-19"><a href="id_1.html#cb30-19" aria-hidden="true" tabindex="-1"></a>     <span class="co">#vertex.label.color = &quot;black&quot;, </span></span>
+<span id="cb30-20"><a href="id_1.html#cb30-20" aria-hidden="true" tabindex="-1"></a>     <span class="co">#vertex.label.cex = 0.9,</span></span>
+<span id="cb30-21"><a href="id_1.html#cb30-21" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.size =</span> <span class="dv">0</span>,</span>
+<span id="cb30-22"><a href="id_1.html#cb30-22" aria-hidden="true" tabindex="-1"></a>     <span class="at">edge.color =</span> <span class="st">&#39;gray28&#39;</span>,</span>
+<span id="cb30-23"><a href="id_1.html#cb30-23" aria-hidden="true" tabindex="-1"></a>     <span class="co">#main = &quot;Largest Clique 2&quot;,</span></span>
+<span id="cb30-24"><a href="id_1.html#cb30-24" aria-hidden="true" tabindex="-1"></a>     <span class="at">layout =</span> <span class="fu">layout.circle</span>(gs2)</span>
+<span id="cb30-25"><a href="id_1.html#cb30-25" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<p><img src="2001-chapter02_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+</div>
+</div>
+<div id="id_1d" class="section level2 hasAnchor" number="3.4">
+<h2><span class="header-section-number">3.4</span> Do birds of a feather flock together?<a href="id_1.html#id_1d" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>Assortativity
+<ul>
+<li><code>assortativity()</code> : calculate the assortativity based on specific attribute .The <a href="https://en.wikipedia.org/wiki/Assortativity">assortativity coefficient</a> is positive is similar vertices (based on some external property) tend to connect to each, and negative otherwise.</li>
+<li><code>assortativity.degree()</code> : calculate the degree assortativity of the network .</li>
+</ul></li>
+<li>Reciprocity
+<ul>
+<li><code>reciprocity()</code> : the <a href="https://en.wikipedia.org/wiki/Reciprocity_(network_science)">reciprocity</a> of a <strong>directed network</strong> reflects the proportion of edges that are symmetrical.</li>
+</ul></li>
+</ul>
+<p>You can also do randomization test to these two metrics.</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="id_1.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert the gender attribute into a numeric value</span></span>
+<span id="cb31-2"><a href="id_1.html#cb31-2" aria-hidden="true" tabindex="-1"></a>values <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">factor</span>(<span class="fu">V</span>(g1)<span class="sc">$</span>gender))</span>
+<span id="cb31-3"><a href="id_1.html#cb31-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-4"><a href="id_1.html#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the assortativity of the network based on gender</span></span>
+<span id="cb31-5"><a href="id_1.html#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="fu">assortativity</span>(g1, values)</span>
+<span id="cb31-6"><a href="id_1.html#cb31-6" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0.1319444</span></span>
+<span id="cb31-7"><a href="id_1.html#cb31-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-8"><a href="id_1.html#cb31-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the assortativity degree of the network</span></span>
+<span id="cb31-9"><a href="id_1.html#cb31-9" aria-hidden="true" tabindex="-1"></a><span class="fu">assortativity.degree</span>(g1, <span class="at">directed =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb31-10"><a href="id_1.html#cb31-10" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0.4615385</span></span>
+<span id="cb31-11"><a href="id_1.html#cb31-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-12"><a href="id_1.html#cb31-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the reciprocity of the direct graph</span></span>
+<span id="cb31-13"><a href="id_1.html#cb31-13" aria-hidden="true" tabindex="-1"></a><span class="fu">reciprocity</span>(g2)</span>
+<span id="cb31-14"><a href="id_1.html#cb31-14" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0</span></span></code></pre></div>
+<div id="id_1d1" class="section level3 hasAnchor" number="3.4.1">
+<h3><span class="header-section-number">3.4.1</span> Community detection<a href="id_1.html#id_1d1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>If a network is said to have a <a href="https://en.wikipedia.org/wiki/Community_structure">community</a> structure then it is possible to assign vertices to <strong>unique sets</strong>.
+- <code>fastgreedy.community()</code> : a community detection method .
+- <code>edge.betweenness.community()</code> : an alternative community detection method.
+- <code>sizes()</code> : determine how many communities were detected and how many club members are in each.
+- <code>membership()</code> : display which club members are in which community.
+- <code>disjoint_union()</code>: the union of two or more graphs are created. The graphs are assumed to have disjoint vertex sets.
+Notice:
+- <code>x %du% y</code> is a simplified form of <code>disjoint_union(...)</code>, and this example is from igraph document.
+- Because the division of this figure is so obvious, there is no difference between the two methods</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="id_1.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a graph</span></span>
+<span id="cb32-2"><a href="id_1.html#cb32-2" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="fu">make_full_graph</span>(<span class="dv">5</span>) <span class="sc">%du%</span> <span class="fu">make_full_graph</span>(<span class="dv">5</span>) <span class="sc">%du%</span> <span class="fu">make_full_graph</span>(<span class="dv">5</span>)</span>
+<span id="cb32-3"><a href="id_1.html#cb32-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-4"><a href="id_1.html#cb32-4" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="fu">add_edges</span>(g, <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">6</span>, <span class="dv">1</span>,<span class="dv">11</span>, <span class="dv">6</span>, <span class="dv">11</span>))</span>
+<span id="cb32-5"><a href="id_1.html#cb32-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-6"><a href="id_1.html#cb32-6" aria-hidden="true" tabindex="-1"></a><span class="co"># make community detection</span></span>
+<span id="cb32-7"><a href="id_1.html#cb32-7" aria-hidden="true" tabindex="-1"></a>fc <span class="ot">&lt;-</span> <span class="fu">fastgreedy.community</span>(g)</span>
+<span id="cb32-8"><a href="id_1.html#cb32-8" aria-hidden="true" tabindex="-1"></a>gc <span class="ot">&lt;-</span> <span class="fu">edge.betweenness.community</span>(g)</span>
+<span id="cb32-9"><a href="id_1.html#cb32-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-10"><a href="id_1.html#cb32-10" aria-hidden="true" tabindex="-1"></a><span class="co"># view metrics</span></span>
+<span id="cb32-11"><a href="id_1.html#cb32-11" aria-hidden="true" tabindex="-1"></a><span class="fu">sizes</span>(fc)</span>
+<span id="cb32-12"><a href="id_1.html#cb32-12" aria-hidden="true" tabindex="-1"></a><span class="do">## Community sizes</span></span>
+<span id="cb32-13"><a href="id_1.html#cb32-13" aria-hidden="true" tabindex="-1"></a><span class="do">## 1 2 3 </span></span>
+<span id="cb32-14"><a href="id_1.html#cb32-14" aria-hidden="true" tabindex="-1"></a><span class="do">## 5 5 5</span></span>
+<span id="cb32-15"><a href="id_1.html#cb32-15" aria-hidden="true" tabindex="-1"></a><span class="fu">membership</span>(fc)</span>
+<span id="cb32-16"><a href="id_1.html#cb32-16" aria-hidden="true" tabindex="-1"></a><span class="do">##  [1] 3 3 3 3 3 1 1 1 1 1 2 2 2 2 2</span></span>
+<span id="cb32-17"><a href="id_1.html#cb32-17" aria-hidden="true" tabindex="-1"></a><span class="fu">sizes</span>(gc)</span>
+<span id="cb32-18"><a href="id_1.html#cb32-18" aria-hidden="true" tabindex="-1"></a><span class="do">## Community sizes</span></span>
+<span id="cb32-19"><a href="id_1.html#cb32-19" aria-hidden="true" tabindex="-1"></a><span class="do">## 1 2 3 </span></span>
+<span id="cb32-20"><a href="id_1.html#cb32-20" aria-hidden="true" tabindex="-1"></a><span class="do">## 5 5 5</span></span>
+<span id="cb32-21"><a href="id_1.html#cb32-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-22"><a href="id_1.html#cb32-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Because this graph is</span></span>
+<span id="cb32-23"><a href="id_1.html#cb32-23" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>)) </span>
+<span id="cb32-24"><a href="id_1.html#cb32-24" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fc, g)</span>
+<span id="cb32-25"><a href="id_1.html#cb32-25" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(gc, g)</span></code></pre></div>
+<p><img src="2001-chapter02_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+</div>
+<div id="id_1d2" class="section level3 hasAnchor" number="3.4.2">
+<h3><span class="header-section-number">3.4.2</span> Interactive network visualizations<a href="id_1.html#id_1d2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>There are many other R packages that also make network visualizations.</p>
+<table>
+<tbody>
+<tr class="odd">
+<td align="center">igraph</td>
+<td align="center">visNetwork</td>
+</tr>
+<tr class="even">
+<td align="center">statnet</td>
+<td align="center">networkD3</td>
+</tr>
+<tr class="odd">
+<td align="center">ggnet</td>
+<td align="center">sigma</td>
+</tr>
+<tr class="even">
+<td align="center">ggnetwork</td>
+<td align="center">rgexf(igraph to Gephi)</td>
+</tr>
+<tr class="odd">
+<td align="center">ggraph</td>
+<td align="center"><strong>threejs</strong></td>
+</tr>
+</tbody>
+</table>
+<p>The threejs package is especially useful for visualizing large networks and integrates very well with igraph. And you can use it to create interactive network visualization.</p>
+<!-- But `graphjs` shows a blank probably threejs return a HTML, I don't know how to slove this problem.😥 -->
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="id_1.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">graphjs</span>(g1, <span class="at">vertex.size =</span> <span class="dv">1</span>)</span></code></pre></div>
+<div id="0cxZ8nduqR" style="width:672px;height:480px;" class="scatterplotThree html-widget"></div>
+<script type="application/json" data-for="0cxZ8nduqR">{"x":{"NROW":19,"height":null,"width":null,"axis":false,"numticks":[6,6,6],"xticklabs":null,"yticklabs":null,"zticklabs":null,"color":[["#24ADDB","#FFA500","#FFA500","#24ADDB","#24ADDB","#FFA500","#24ADDB","#FFA500","#24ADDB","#FFA500","#FFA500","#24ADDB","#24ADDB","#24ADDB","#24ADDB","#24ADDB","#24ADDB","#FFA500","#FFA500"]],"size":1,"stroke":"black","flipy":true,"grid":false,"renderer":"auto","signif":8,"bg":"white","cexsymbols":1,"xlim":[-1,1],"ylim":[-1,1],"zlim":[-1,1],"axisscale":[1,1,1],"pch":["@","@","@","@","@","@","@","@","@","@","@","@","@","@","@","@","@","@","@"],"elementId":"0cxZ8nduqR","from":[[0,0,0,1,2,3,3,3,4,4,4,5,6,6,7,7,8,9,10,10,11,11,12,12,13]],"to":[[3,4,6,2,5,6,14,7,6,7,8,14,7,8,8,9,15,10,11,16,16,17,13,18,18]],"lwd":1,"linealpha":1,"center":true,"main":[""],"options":true,"alpha":[[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]],"vertices":[[0.56983965,0.084372653,-1,0.71230604,0.88448402,1,0.91138138,0.9419612,0.60982995,0.54867956,0.3745559,-0.67488234,0.051740489,-0.12910649,-0.91515861,1,1,0.13104307,0.35270086,-0.065913778,-0.69576035,-0.051889141,0.1451166,-0.60468194,-0.050286653,-0.48025124,-0.62554044,-0.4694636,0.54085171,-0.2772825,-0.75738044,0.59566204,0.20104869,-0.7977564,0.36171049,0.61217487,0.47084931,-0.88126157,0.70021477,0.87141259,-0.82075064,0.75777591,0.84247061,0.88068405,-0.35003304,-0.24038763,-1,-0.41933336,-1,0.7206328,0.46814111,-0.69292629,-0.09383891,0.87294397,0.80226183,-0.91884452,0.45135272]],"xticklab":["-1.00","-0.60","-0.20","0.20","0.60","1.00"],"yticklab":["-1.00","-0.60","-0.20","0.20","0.60","1.00"],"zticklab":["1.00","0.60","0.20","-0.20","-0.60","-1.00"],"xtick":[0,0.2,0.4,0.6,0.8,1],"ytick":[0,0.2,0.4,0.6,0.8,1],"ztick":[0,0.2,0.4,0.6,0.8,1],"axislength":[1,1,1]},"evals":[],"jsHooks":[]}</script>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="id_1.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Another unrelated but unprecedented operation that I have not encountered before</span></span>
+<span id="cb34-2"><a href="id_1.html#cb34-2" aria-hidden="true" tabindex="-1"></a>i <span class="ot">&lt;-</span>  <span class="fu">membership</span>(fc)</span>
+<span id="cb34-3"><a href="id_1.html#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="st">&quot;yellow&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;red&quot;</span>)[i]</span></code></pre></div>
+<pre><code>##  [1] &quot;red&quot;    &quot;red&quot;    &quot;red&quot;    &quot;red&quot;    &quot;red&quot;    &quot;yellow&quot; &quot;yellow&quot; &quot;yellow&quot;
+##  [9] &quot;yellow&quot; &quot;yellow&quot; &quot;blue&quot;   &quot;blue&quot;   &quot;blue&quot;   &quot;blue&quot;   &quot;blue&quot;</code></pre>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="causal.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["CBook.pdf"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
